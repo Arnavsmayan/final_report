@@ -84,6 +84,10 @@
                       justification=centering, font={stretch=1.5}}
 \usepackage{booktabs}
 
+% ── TikZ for inline diagrams ────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, calc}
+
 % ── Float spacing ────────────────────────────────────────────
 \setlength{\intextsep}{8pt}
 \setlength{\textfloatsep}{8pt}
@@ -122,7 +126,7 @@
 
 \vspace{0.6cm}
 
-{\fontsize{18}{22}\selectfont\bfseries Frontend Observability}
+{\fontsize{18}{22}\selectfont\bfseries Agent Eval}
 
 \vspace{0.6cm}
 
@@ -130,11 +134,11 @@
 
 \vspace{0.5cm}
 
-{\fontsize{16}{18}\selectfont\bfseries Rachit Bansal}
+{\fontsize{16}{18}\selectfont\bfseries Arnav Jain}
 
 \vspace{0.4cm}
 
-{\fontsize{14}{16}\selectfont\bfseries Roll No. 102203155}
+{\fontsize{14}{16}\selectfont\bfseries Roll No. 102203979}
 
 \vspace{0.8cm}
 
@@ -143,7 +147,7 @@
 \vspace{0.4cm}
 
 {\fontsize{13}{15}\selectfont\bfseries
-Faculty Mentor: Dr. Chinmaya Panigrahy
+Faculty Mentor: Dr. Anjulo Mehto
 }
 
 {\fontsize{12}{14}\selectfont
@@ -159,11 +163,11 @@ and
 \vspace{0.15cm}
 
 {\fontsize{13}{15}\selectfont\bfseries
-Industrial Mentor: Debangan Bhattacharyya
+Industrial Mentor: Malashree B
 }
 
 {\fontsize{12}{14}\selectfont
-Software Engineer at Birla Pivot
+Associate Director at Eli Lilly and Company
 }
 
 \vspace{0.4cm}
@@ -202,7 +206,7 @@ Thapar Institute of Engineering \& Technology, Patiala
 
 \vspace{0.3cm}
 
-{\fontsize{13}{15}\selectfont\bfseries June 2026}
+{\fontsize{13}{15}\selectfont\bfseries July 2026}
 
 \end{center}
 \end{titlepage}
@@ -217,15 +221,15 @@ Thapar Institute of Engineering \& Technology, Patiala
 % ── Abstract ────────────────────────────────────────────────
 \thispagestyle{plain}
 
-\noindent{\fontsize{16}{18}\selectfont\bfseries Frontend Observability}
+\noindent{\fontsize{16}{18}\selectfont\bfseries Agent Eval}
 
 \vspace{0.15in}
 
-\noindent{\fontsize{12}{14}\selectfont by {{Rachit Bansal}}}
+\noindent{\fontsize{12}{14}\selectfont by {{Arnav Jain}}}
 
 \vspace{0.1in}
 
-\noindent{\fontsize{12}{14}\selectfont Place of Work: Birla Pivot}
+\noindent{\fontsize{12}{14}\selectfont Place of Work: Eli Lilly and Company}
 
 \vspace{0.15in}
 
@@ -234,7 +238,7 @@ Submitted to the Computer Science \& Engineering Department, Thapar Institute of
 
 \vspace{0.15in}
 
-\noindent{\fontsize{12}{14}\selectfont June 2026}
+\noindent{\fontsize{12}{14}\selectfont July 2026}
 
 \vspace{0.15in}
 
@@ -248,15 +252,15 @@ In Partial Fulfillment of the Requirements for the Degree of Bachelor of Enginee
 \vspace{0.05in}
 
 {\fontsize{12}{14}\selectfont
-Modern web applications require continuous monitoring to ensure reliability, performance, and a seamless user experience. This project focused on designing and implementing a Frontend Observability solution to provide real-time visibility into application health, user interactions, frontend errors, and API behavior.
+Agentic artificial intelligence systems are increasingly being deployed across enterprise workflows for tasks such as document summarization, information extraction, code generation, and decision support. Evaluating whether these systems consistently produce reliable, safe, and goal aligned outputs remains a significant challenge because their behavior is probabilistic, multi step, and highly context dependent.
 
-A custom observability framework was developed and integrated into the existing infrastructure to address organization-specific monitoring requirements that were not adequately supported by available off-the-shelf solutions. The system captures frontend exceptions, network failures, performance metrics, user activity events, and application health indicators, enabling comprehensive monitoring of client-side application behavior.
+This project focused on the design and implementation of Agent Eval, a reusable Software Development Kit for evaluating the outputs of agentic workflows using a Large Language Model based judging approach. The SDK provides a single function entry point that accepts the input and output of any agent and returns a structured evaluation result including a numerical score, a pass or fail verdict, governance findings, and detailed reasoning.
 
-The collected telemetry data is processed through a scalable monitoring pipeline and visualized using dashboards and centralized logging solutions such as Grafana and Kibana. Real-time alerting mechanisms were also implemented to proactively detect critical issues and reduce troubleshooting time.
+Agent Eval is built on a three agent LangGraph state machine. The first agent generates evaluation criteria from the provided input and output, the second agent runs a strict governance check across fifteen evaluators organized into five pillars, and the third agent synthesizes the final score and verdict. The SDK also supports multi model consensus evaluation, where the same workflow is executed independently across multiple judge models and a final synthesis agent produces a consolidated result.
 
-A key contribution of this project is the development of custom observability workflows and instrumentation strategies tailored to the organization's architecture, deployment model, and operational processes.
+The implemented framework integrates with the internal Eli Lilly LLM Gateway through Microsoft OAuth2 authentication and supports both GPT 5 and Claude Sonnet models. Token usage and cost tracking are built into every evaluation, and a self contained HTML report is automatically generated for each run. The SDK has been validated across a wide variety of evaluation scenarios involving diverse agent inputs and outputs of differing complexity, length, and domain.
 
-The implemented solution improves operational visibility, accelerates issue resolution, and enables data-driven decision-making, ultimately contributing to enhanced application reliability, performance, and user satisfaction.
+The resulting solution provides a vendor independent, extensible, and production ready foundation for governance focused evaluation of agentic AI workflows, enabling teams to gain confidence in agent behavior before production deployment.
 }
 
 \vspace{0.3in}
@@ -269,7 +273,7 @@ Author
 \vspace{-0.30cm}
 
 \hspace*{2.8cm}
-(Rachit Bansal)
+(Arnav Jain)
 
 \vspace{0.4in}
 
@@ -317,13 +321,6 @@ Certified by
     FROM THE COMPANY OR ORGANIZATION}
 \end{center}
 
-% \vspace{0.3in}
-
-% \noindent Candidate must place the scanned or original copy of the certificate
-% related to completion of the project semester as received from the software
-% company / research institute.
-
-% \includepdf[pages=1]{Project_Sem_Certificate.pdf}
 \begin{center}
     \includegraphics[height=0.90\textheight,keepaspectratio]{Project_Sem_Certificate.pdf}
 \end{center}
@@ -357,26 +354,26 @@ Certified by
 
 \section{Overview of the Company}
 
-Birla Pivot is the B2B e-commerce platform of the Aditya Birla Group, one of India's leading multinational conglomerates with a strong presence across manufacturing, financial services, retail, telecommunications, metals, cement, chemicals, and other industries. Birla Pivot aims to digitally transform the procurement and supply chain ecosystem by providing businesses with a unified platform for sourcing industrial products and services. The organization focuses on leveraging technology to improve efficiency, transparency, and accessibility within the B2B commerce sector.
+Eli Lilly and Company is a global pharmaceutical organization headquartered in Indianapolis, Indiana, with operations across more than one hundred countries. Founded in 1876, the company has built a strong reputation for developing medicines in areas such as diabetes, oncology, immunology, and neuroscience. In addition to its core pharmaceutical research and development activities, Eli Lilly invests heavily in digital transformation, data science, and applied artificial intelligence to accelerate drug discovery, improve clinical workflows, and modernize enterprise operations.
 
 \section{Products and Services}
 
-Birla Pivot offers a comprehensive digital marketplace that connects buyers and sellers across multiple industrial categories. The platform provides businesses with access to a wide range of products, including industrial equipment, construction materials, electrical supplies, safety products, and other enterprise procurement requirements. In addition to product discovery and purchasing, the platform supports digital transactions, supplier management, order tracking, and streamlined procurement workflows to enhance operational efficiency.
+Eli Lilly delivers a wide portfolio of medicines that address chronic conditions and life threatening diseases. Beyond its core pharmaceutical products, the organization operates internal digital platforms that support research, manufacturing, regulatory affairs, and commercial functions. These digital platforms increasingly rely on advanced data analytics, automation, and generative artificial intelligence to support scientific and business decision making.
 
 \section{Technology and Innovation}
 
-Technology plays a central role in Birla Pivot's vision of creating a modern and scalable B2B commerce ecosystem. The organization adopts cloud-based infrastructure, data-driven decision-making, modern web technologies, observability solutions, and automation practices to build reliable and high-performing digital platforms. Continuous innovation is encouraged through the development of scalable systems, monitoring frameworks, analytics solutions, and customer-centric digital experiences.
+Technology plays a central role at Eli Lilly. The organization invests in cloud infrastructure, modern data platforms, machine learning systems, and large language model based applications. The internal LLM Gateway provides a governed and centrally managed access layer through which authorized teams can build applications that consume models such as GPT 5 and Claude Sonnet. Continuous innovation is supported through dedicated platforms, internal research teams, and applied artificial intelligence initiatives across the enterprise.
 
 \section{Internship Experience and Learning Environment}
 
-My internship at Birla Pivot provided valuable exposure to large-scale enterprise application development and modern software engineering practices. I worked closely with experienced professionals and contributed to the design and implementation of a Frontend Observability solution aimed at improving application monitoring, reliability, and operational visibility. The collaborative work environment encouraged learning, problem-solving, ownership, and innovation, enabling me to gain practical experience in frontend engineering, monitoring systems, logging, dashboarding, and production-grade software development practices.
+My internship at Eli Lilly provided valuable exposure to applied artificial intelligence and enterprise grade software engineering. I worked within a team focused on agentic AI tooling and contributed to the design and implementation of Agent Eval, a Software Development Kit for evaluating agentic workflows. The work environment encouraged technical ownership, structured problem solving, and direct collaboration with senior engineers and stakeholders. The exposure to real production use cases, internal model gateway infrastructure, and governance focused engineering practices made the internship a strong learning experience.
 
 \vspace{0.5cm}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.40\textwidth]{Birla_Pivot.png}
-    \caption{Birla Pivot Logo}
-    \label{fig:Birla_Pivot}
+    \includegraphics[width=0.40\textwidth]{EliLilly_Logo.png}
+    \caption{Eli Lilly and Company Logo}
+    \label{fig:EliLilly_Logo}
 \end{figure}
 
 % ============================================================
@@ -384,101 +381,107 @@ My internship at Birla Pivot provided valuable exposure to large-scale enterpris
 % ============================================================
 \chapter{Introduction}
 
-As modern web applications continue to grow in scale and complexity, ensuring a seamless user experience has become increasingly challenging. While backend systems are typically equipped with robust monitoring solutions, understanding what users actually experience on the frontend remains a difficult problem. A failed API call, a JavaScript exception, a slow page load, or a broken user journey can directly impact business operations, yet these issues often go unnoticed until reported by end users.
+Agentic artificial intelligence systems have rapidly moved from research prototypes into real production workflows. These systems use large language models to plan, reason, call tools, and produce structured outputs for tasks such as document summarization, information extraction, code generation, and customer support. While the capabilities of these systems continue to grow, the question of how to reliably evaluate their outputs remains largely unsolved. Traditional software testing assumes deterministic behavior, whereas agentic outputs are probabilistic, context dependent, and often free form text.
 
-During my internship at Birla Pivot, I worked on building a Frontend Observability platform aimed at bridging this visibility gap. The goal of the project was to provide engineering teams with real-time insights into application behavior, user interactions, frontend errors, API performance, and overall application health from the user's perspective.
+During my internship at Eli Lilly, I worked on building Agent Eval, a Software Development Kit designed to evaluate the outputs of agentic workflows using a Large Language Model based judging approach. The goal of the project was to provide engineering teams with a simple, consistent, and governance aware way to score agentic outputs before deploying them into production systems.
 
-One of the key challenges was that the existing monitoring ecosystem was primarily focused on infrastructure and backend services. Off-the-shelf frontend monitoring solutions did not align completely with the organization's architecture, workflows, and operational requirements. To address this, a custom observability framework was designed and implemented from the ground up, enabling seamless integration with the existing technology stack and monitoring infrastructure.
+A key challenge during the project was that existing open source evaluation libraries did not align with the organization's requirements. They lacked governance focused evaluators, were not integrated with the internal LLM Gateway, and did not support multi model consensus evaluation. To address these gaps, a custom SDK was designed and implemented from the ground up with a focus on usability, governance, and operational readiness.
 
-The solution involved frontend instrumentation, centralized event collection, custom logging pipelines, dashboard creation, real-time alerting, and operational analytics. Technologies such as JavaScript/TypeScript, React, Grafana, Kibana, Elasticsearch, and cloud-native monitoring components were leveraged to build a scalable and production-ready system.
+The solution involved designing a three agent evaluation pipeline using LangGraph, defining a fixed catalog of fifteen governance evaluators across five pillars, implementing multi model consensus, integrating with the internal LLM Gateway, and generating self contained HTML reports for every evaluation. Technologies such as Python, LangGraph, LangChain, and the internal Eli Lilly LLM Gateway were leveraged to build a reusable and production ready solution.
 
-The implemented platform provides end-to-end visibility into frontend application health, accelerates issue detection and troubleshooting, supports data-driven decision making, and establishes a strong foundation for future observability initiatives within the organization. Beyond the technical implementation, the project offered valuable exposure to large-scale software systems, monitoring architectures, production operations, and modern engineering practices used in enterprise environments.
+The resulting SDK provides a structured way to assess agentic outputs, accelerates evaluation cycles, supports governance discussions, and establishes a strong foundation for further automation of agent quality assurance within the organization. Beyond the technical implementation, the project offered valuable exposure to applied artificial intelligence engineering, system design, and modern software development practices used in enterprise environments.
 
 % ============================================================
 %  3.  BACKGROUND
 % ============================================================
 \chapter{Background}
 
-\section{Frontend Observability in Modern Web Applications}
+\section{LLM as Judge in Modern AI Systems}
 
-Modern web applications have evolved into highly distributed systems involving multiple frontend modules, backend services, third-party integrations, and complex user workflows. While organizations commonly invest in backend and infrastructure monitoring, obtaining visibility into the actual experience of end users remains a significant challenge.
+Modern enterprise applications frequently involve large language models that generate free form, complex, or multi step outputs. Evaluating these outputs is fundamentally different from evaluating traditional software. There is rarely a single correct answer, the output may be valid in multiple forms, and the quality depends on factors such as factual accuracy, reasoning soundness, policy compliance, and contextual relevance.
 
-Issues such as JavaScript exceptions, failed API requests, slow page loads, browser-specific problems, and network connectivity failures directly affect users and business operations. However, these issues are often difficult to detect through traditional monitoring solutions because they originate within the user's browser environment. This creates a visibility gap between system health and user experience, making frontend observability an increasingly important aspect of modern software engineering.
+To address this evaluation gap, the LLM as judge approach has emerged as a widely accepted technique. In this approach, one or more language models are used to assess the quality of outputs produced by another model or agent. This pattern enables scalable, structured, and explainable evaluation that goes beyond keyword matching or static rules.
 
-\section{Existing Monitoring Landscape}
+\section{Existing Evaluation Landscape}
 
-At Birla Pivot, monitoring capabilities were primarily focused on infrastructure components, backend services, and operational metrics. While these systems provided valuable insights into server-side behavior, they offered limited visibility into frontend-specific incidents and user-facing issues.
+At the start of the project, several open source evaluation libraries were available, including frameworks for retrieval augmented generation evaluation, simple LLM scoring, and general purpose testing utilities. While these tools offered useful starting points, they did not fully meet the requirements of the organization. They lacked governance focused evaluators such as prompt injection detection, data exposure checks, and tool necessity analysis. They also did not integrate with the internal Eli Lilly LLM Gateway or support a structured multi model consensus workflow.
 
-As a result, diagnosing frontend failures often required manual investigation across multiple systems and teams. Understanding whether an issue originated from the frontend application, a network failure, a backend service, or an external dependency was frequently a time-consuming process. The absence of centralized frontend visibility highlighted the need for a dedicated observability solution capable of providing actionable insights into application behavior from the user's perspective.
+As a result, diagnosing failures in agentic workflows often required ad hoc review by engineers, leading to inconsistent quality assessments, slow feedback cycles, and limited confidence when promoting agentic features to production.
 
 \section{Proof of Concept and Technology Evaluation}
 
-Before introducing any changes into production systems, a dedicated Proof of Concept (PoC) was developed in a separate project environment. Given the scale and potential impact of the proposed frontend observability solution, direct implementation within the organization's applications was considered inappropriate during the initial stages. The PoC provided a controlled environment for experimentation, validation, and stakeholder alignment before proceeding with production adoption.
+Before committing to a final architecture, a dedicated Proof of Concept (PoC) was developed in an isolated environment. The PoC was used to validate the feasibility of an LLM as judge pipeline, evaluate orchestration frameworks, and explore different evaluator structures before committing to a production design.
 
-The primary objective of the PoC was to evaluate different approaches for frontend telemetry collection, centralized logging, monitoring, and visualization. During this phase, multiple technologies and architectural patterns were explored, including centralized logging solutions such as Loki and other observability components. The evaluation focused on understanding integration requirements, scalability characteristics, operational feasibility, and the suitability of different technologies for frontend monitoring use cases.
+The primary objective of the PoC was to evaluate orchestration frameworks for chaining multiple judge agents and to validate the feasibility of generating structured, machine readable scores from natural language judge outputs. During this phase, multiple technologies and architectural patterns were explored, including LangChain, LangGraph, and direct API calls without orchestration libraries.
 
-In addition to evaluating open-source observability components, commercially available frontend monitoring platforms were also studied to understand their capabilities, integration requirements, and operational implications. While these solutions offered several advanced features, their adoption would have introduced additional licensing, onboarding, and long-term operational costs.
+The evaluation focused on integration requirements, error handling, observability of internal pipeline state, and the ability to extend the design to support multi model consensus. LangGraph was ultimately selected because of its native support for state machine based agent orchestration, predictable execution order, and clean separation between agent responsibilities.
 
-During the evaluation phase, Loki-based logging architectures were also explored as part of the Proof of Concept. Although technically feasible, introducing a dedicated logging stack would have required additional infrastructure management and operational overhead. Since a mature OpenSearch-based ecosystem already existed within the organization, it was determined that leveraging the existing infrastructure would provide better integration, operational simplicity, and long-term maintainability.
+In addition to evaluating orchestration frameworks, commercially available evaluation platforms were also studied to understand their capabilities, integration requirements, and operational implications. While these solutions offered several advanced features, their adoption would have introduced additional licensing, onboarding, and long term operational costs along with vendor lock in concerns.
 
-The evaluation ultimately led to the selection of a custom observability architecture that maximized reuse of existing organizational capabilities while minimizing additional dependencies and operational costs.
+The evaluation ultimately led to the selection of a custom SDK architecture that maximized reuse of internal organizational capabilities while minimizing additional dependencies and operational costs.
 
-The PoC also helped identify potential implementation challenges and provided valuable insights into how telemetry data could be collected, processed, stored, and visualized effectively. The findings from these experiments established a clearer understanding of project requirements and enabled informed technology selection for the final solution.
+The PoC also helped identify potential implementation challenges and provided valuable insights into how judge outputs could be parsed, validated, and aggregated into a consistent scoring scheme. The findings from these experiments established a clearer understanding of project requirements and enabled informed technology selection for the final solution.
 
-In addition to technical validation, the PoC served as an important communication tool between frontend engineers, platform teams, and management. By demonstrating practical use cases and expected outcomes, it enabled stakeholders to visualize the proposed solution, provide early feedback, and align on project goals, implementation feasibility, and future requirements before production deployment.
+In addition to technical validation, the PoC served as an important communication tool between the engineering team and stakeholders. By demonstrating practical evaluation use cases on real internal data, it enabled stakeholders to visualize the proposed solution, provide early feedback, and align on the SDK's scope and roadmap before final implementation.
 
-\section{Observability Solution Evaluation}
+\section{Evaluation Approach Comparison}
 
-As part of the technology evaluation process, different observability approaches were compared based on functional capabilities, operational requirements, and long-term sustainability.
+As part of the technology evaluation process, different evaluation approaches were compared based on functional capabilities, operational requirements, and long term sustainability.
 
 \begin{table}[h]
 \centering
-\caption{Comparison of Observability Approaches}
-\label{tab:observability-comparison}
+\caption{Comparison of Evaluation Approaches}
+\label{tab:evaluation-comparison}
 \begin{tabular}{|p{6cm}|p{5cm}|p{5cm}|}
 \hline
-\textbf{Criteria} & \textbf{Commercial Observability Platforms} & \textbf{Proposed Solution} \\
+\textbf{Criteria} & \textbf{Open Source Libraries} & \textbf{Proposed Solution} \\
 \hline
 
-Frontend Error Monitoring &
+LLM as Judge Scoring &
 Supported &
 Supported
 \\
 \hline
 
-API Performance Monitoring &
-Supported &
+Governance Focused Evaluators &
+Limited &
+Comprehensive
+\\
+\hline
+
+Multi Model Consensus &
+Not Supported &
 Supported
 \\
 \hline
 
-Dashboarding and Visualization &
-Supported &
-Supported
+Internal LLM Gateway Integration &
+Not Supported &
+Native
 \\
 \hline
 
-Vendor Lock-in &
-High &
-None
+Token and Cost Tracking &
+Not Supported &
+Built In
+\\
+\hline
+
+Interactive HTML Report &
+Limited &
+Built In
 \\
 \hline
 
 Customization Flexibility &
-Limited by Vendor &
-High
-\\
-\hline
-
-Integration with Existing Infrastructure &
 Moderate &
 High
 \\
 \hline
 
-Licensing Requirements &
-Required &
-Not Required
+Vendor Lock In &
+Some &
+None
 \\
 \hline
 
@@ -488,7 +491,7 @@ Minimal
 \\
 \hline
 
-Long-Term Operational Cost &
+Long Term Operational Cost &
 Higher &
 Lower
 \\
@@ -497,59 +500,78 @@ Lower
 \end{tabular}
 \end{table}
 
-The evaluation demonstrated that a custom-built solution could provide the required observability capabilities while offering greater flexibility, reduced operational complexity, and significant long-term cost advantages. These findings supported the decision to proceed with the proposed architecture for the implementation phase.
+The evaluation demonstrated that a custom built SDK could provide the required evaluation capabilities while offering greater flexibility, reduced operational complexity, and significant long term cost advantages. These findings supported the decision to proceed with the proposed architecture for the implementation phase.
 
 \section{Evolution of Project Requirements}
 
-The project initially began with the objective of improving visibility into frontend errors and API failures. However, as discussions progressed with different stakeholders, the scope expanded significantly.
+The project initially began with the objective of providing a simple LLM as judge function for scoring agent outputs against a single set of generated criteria. As discussions progressed with engineering teams and stakeholders, the scope expanded significantly.
 
-Additional requirements emerged around application performance monitoring, user session visibility, browser and device analytics, network failure tracking, operational dashboards, and proactive issue detection. The project gradually evolved from a simple monitoring initiative into a broader frontend observability platform capable of supporting operational, debugging, and analytical use cases.
-
-This iterative requirement gathering process played a crucial role in shaping the final vision of the project and ensured that the solution addressed the needs of multiple teams across the organization.
+Additional requirements emerged around governance specific checks, multi model consensus to reduce single model bias, cost tracking, interactive HTML reports, and a clean Python API that could be embedded inside automated workflows. The project gradually evolved from a basic scoring function into a complete evaluation SDK capable of supporting governance, debugging, and analytical use cases.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\textwidth]{Broad_Workflow.png}
-    \caption{Overall Workflow}
-    \label{fig:Broad_Workflow}
+    \begin{tikzpicture}[
+      font=\small,
+      block/.style={rectangle, rounded corners, draw=black, thick, minimum width=4.2cm, minimum height=0.85cm, align=center},
+      user/.style={block, fill=gray!15},
+      sdk/.style={block, fill=blue!10},
+      gw/.style={block, fill=orange!18},
+      model/.style={block, fill=red!12, minimum width=2cm},
+      outbox/.style={block, fill=green!15, minimum width=3.2cm},
+      arrow/.style={-{Stealth[length=2.5mm]}, thick}
+    ]
+      \node[user] (caller) {User Application Code};
+      \node[sdk, below=0.55cm of caller] (entry) {\texttt{evaluate(input, output)}};
+      \node[sdk, below=0.55cm of entry] (pipeline) {Three Agent Pipeline\\(Child $\to$ Tertiary $\to$ Main)};
+      \node[gw, below=0.55cm of pipeline] (gwc) {LillyGatewayLLM Client (OAuth2)};
+      \node[gw, below=0.55cm of gwc] (gw) {Lilly Internal LLM Gateway};
+      \node[model, below=0.7cm of gw, xshift=-1.8cm] (gpt) {GPT-5};
+      \node[model, below=0.7cm of gw, xshift=1.8cm] (cl) {Claude Sonnet};
+      \node[outbox, right=1.2cm of pipeline] (result) {Result + HTML Report};
+
+      \draw[arrow] (caller) -- (entry);
+      \draw[arrow] (entry) -- (pipeline);
+      \draw[arrow] (pipeline) -- (gwc);
+      \draw[arrow] (gwc) -- (gw);
+      \draw[arrow] (gw) -- (gpt);
+      \draw[arrow] (gw) -- (cl);
+      \draw[arrow] (pipeline) -- (result);
+    \end{tikzpicture}
+    \caption{High Level Architecture of Agent Eval}
+    \label{fig:high_level_architecture}
 \end{figure}
 
-This workflow, illustrated in Figure \ref{fig:Broad_Workflow}, represents the overall workflow of the frontend observability.
+This high level architecture, illustrated in Figure \ref{fig:high_level_architecture}, represents the overall flow of an evaluation request through the Agent Eval SDK.
 
 \section{Motivation for the Project}
 
-The motivation behind this project extended far beyond implementing a new monitoring tool. It presented an opportunity to work on a completely different engineering domain involving observability, telemetry collection, monitoring systems, and operational analytics.
+The motivation behind this project extended beyond building another evaluation library. It presented an opportunity to work on the practical question of how to safely deploy agentic AI systems within an enterprise environment. Since agentic outputs increasingly drive downstream decisions and business workflows, having a structured and reproducible way to evaluate them is essential.
 
-Unlike traditional feature development, the project required understanding multiple technologies, evaluating different architectural approaches, and designing a solution that could be adopted across teams. Since the frontend acts as the primary interaction layer between users and business services, issues occurring at this layer can directly impact user experience, business workflows, API consumption, and overall platform reliability.
-
-The potential organizational impact of the project served as a strong source of motivation. Successfully implementing a frontend observability framework would not only improve issue detection and troubleshooting but also establish a long-term foundation for monitoring and operational excellence across the organization. The combination of technical complexity, cross-functional collaboration, and company-wide relevance made this project both challenging and highly rewarding.
+Unlike traditional feature development, the project required understanding agent behavior, evaluation methodology, prompt engineering for judge agents, and the operational realities of running large language model workloads within a regulated organization. The potential organizational impact of having a unified evaluation framework served as a strong source of motivation. A successful SDK would not only improve confidence in agent outputs but also establish a long term foundation for governance, observability, and quality assurance across applied AI initiatives.
 
 % ============================================================
 %  4.  OBJECTIVES
 % ============================================================
 \chapter{Objectives}
 
-The primary objective of this project was to design and implement a comprehensive Frontend Observability platform capable of providing real-time visibility into application behavior, performance, and reliability. To achieve this goal, the following objectives were defined:
+The primary objective of this project was to design and implement a reusable Software Development Kit capable of evaluating the outputs of agentic AI workflows using a Large Language Model based judging approach. To achieve this goal, the following objectives were defined:
 
 \begin{enumerate}
 
-\item \textbf{Evaluation of Frontend Observability Approaches.}
-To study and evaluate different frontend observability approaches and technologies through a dedicated Proof of Concept (PoC), and identify an architecture suitable for the organization's requirements.
+\item \textbf{Evaluation of Agentic AI Evaluation Approaches.}
+To study and evaluate different agentic evaluation approaches and orchestration frameworks through a dedicated Proof of Concept (PoC), and identify an architecture suitable for the organization's requirements.
 
-\item \textbf{Development of a Telemetry Collection Framework.}
-To design and implement a scalable, vendor-independent telemetry collection framework capable of capturing frontend events, API interactions, application errors, and performance metrics from user browsers.
+\item \textbf{Development of a Reusable Evaluation SDK.}
+To design and implement a reusable Python SDK with a single function entry point capable of evaluating the outputs of any agentic workflow, regardless of the underlying agent framework, model, or domain.
 
-\item \textbf{Establishment of an End-to-End Observability Pipeline.}
-To establish an end-to-end observability pipeline for collecting, processing, transforming, and storing frontend telemetry data using modern observability standards and tools.
+\item \textbf{Implementation of a Governance Focused Evaluator Catalog.}
+To define and implement a fixed catalog of fifteen governance evaluators organized into five pillars covering goal alignment, compliance, reasoning, tool safety, and robustness.
 
-\item \textbf{Implementation of Comprehensive Monitoring Capabilities.}
-To implement comprehensive monitoring capabilities including frontend error tracking, API performance monitoring, network failure detection, Core Web Vitals measurement, user session analytics, and browser-level insights.
+\item \textbf{Support for Multi Model Consensus Evaluation.}
+To enable evaluation using multiple judge models in parallel and synthesize a consensus verdict in order to reduce single model bias and increase confidence in the final score.
 
-\item \textbf{Development of Dashboards and Visualization Solutions.}
-To develop centralized dashboards, log analytics, and visualization solutions that provide engineering teams with actionable insights into application health, user experience, and operational performance.
-
-\item \textbf{Enabling Proactive Issue Detection and Troubleshooting.}
-To enable proactive issue detection and faster troubleshooting through real-time monitoring, structured telemetry, centralized logging, and alerting mechanisms integrated with the existing organizational infrastructure.
+\item \textbf{Integration with Internal Gateway and Interactive Reporting.}
+To integrate the SDK with the internal Eli Lilly LLM Gateway using Microsoft OAuth2 authentication and to generate a self contained interactive HTML report for each evaluation, including scores, verdicts, evidence, and cost information.
 
 \end{enumerate}
 
@@ -558,85 +580,102 @@ To enable proactive issue detection and faster troubleshooting through real-time
 % ============================================================
 \chapter{Methodology}
 
-This chapter describes the approach followed to achieve the objectives of the project. The implementation was carried out in multiple phases, beginning with requirement analysis and technology evaluation, followed by architecture design, telemetry collection, data processing, visualization, and operational monitoring.
+This chapter describes the approach followed to achieve the objectives of the project. The implementation was carried out in multiple phases, beginning with requirement analysis and technology evaluation, followed by architecture design, evaluator implementation, pipeline execution, reporting, and validation.
 
 \section{Requirement Analysis and Planning}
 
-The project commenced with discussions involving frontend engineers, platform teams, and management to identify existing monitoring gaps and operational challenges. Multiple use cases were studied, including frontend error tracking, API performance monitoring, user session visibility, performance measurement, and proactive issue detection.
+The project commenced with discussions involving applied AI engineers, platform teams, and stakeholders to identify gaps in existing evaluation tooling and operational challenges encountered while assessing agentic outputs. Multiple categories of agentic workflows were considered, including document summarization, structured information extraction, code generation, and chatbot question answering.
 
-Based on the identified requirements, a roadmap was prepared to design a frontend observability platform capable of providing end-to-end visibility into application behavior while integrating seamlessly with the existing organizational infrastructure.
+Based on the identified requirements, a roadmap was prepared to design an evaluation SDK capable of providing structured, governance aware scoring while integrating seamlessly with the internal LLM Gateway and existing engineering workflows.
 
 \section{Proof of Concept Development}
 
-Before introducing any changes into production systems, a dedicated Proof of Concept (PoC) was developed using a separate local project environment.
+Before introducing any changes into production workflows, a dedicated Proof of Concept (PoC) was developed in a separate local environment.
 
 The PoC focused on the following objectives:
 
 \begin{itemize}
-    \item Evaluating frontend instrumentation approaches.
-    \item Understanding telemetry collection mechanisms.
-    \item Studying centralized logging architectures.
-    \item Validating data storage strategies.
-    \item Comparing visualization and monitoring solutions.
-    \item Assessing scalability and operational feasibility.
+    \item Evaluating orchestration frameworks for chaining multiple judge agents.
+    \item Validating the parsing of structured JSON responses from LLM outputs.
+    \item Studying state propagation between agents in a multi step pipeline.
+    \item Exploring strategies for governance focused evaluator design.
+    \item Comparing single model and multi model evaluation behavior.
+    \item Assessing extensibility for additional evaluators in the future.
 \end{itemize}
 
-Multiple observability technologies and architectural approaches were explored during this phase, helping establish the technical foundation for the final implementation and providing confidence before proceeding towards a production-ready solution.
+Multiple orchestration approaches and evaluator structures were explored during this phase, helping establish the technical foundation for the final implementation and providing confidence before proceeding towards a production ready solution.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=1.0\textwidth]{POC.png}
-  \caption{Proof of Concept Evaluation Workflow}
-  \label{fig:POC}
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    font=\small,
+    io/.style={trapezium, trapezium left angle=70, trapezium right angle=110, draw, minimum width=2.3cm, minimum height=1.0cm, fill=gray!15, align=center},
+    agent/.style={rectangle, rounded corners, draw=black, thick, minimum width=3.3cm, minimum height=1.5cm, align=center, fill=blue!10},
+    result/.style={rectangle, rounded corners, draw=black, thick, minimum width=2.8cm, minimum height=1.0cm, align=center, fill=green!15},
+    arrow/.style={-{Stealth[length=2.5mm]}, thick}
+  ]
+    \node[io] (input) {Input \&\\Output};
+    \node[agent, right=0.8cm of input] (child) {Child Agent\\\footnotesize Criteria Generation};
+    \node[agent, right=0.8cm of child] (tert) {Tertiary Agent\\\footnotesize Governance\\\footnotesize (15 Evaluators)};
+    \node[agent, right=0.8cm of tert] (main) {Main Agent\\\footnotesize Final Synthesis};
+    \node[result, right=0.8cm of main] (out) {Score,\\Verdict,\\Evidence};
+    \draw[arrow] (input) -- (child);
+    \draw[arrow] (child) -- node[above, font=\scriptsize]{criteria} (tert);
+    \draw[arrow] (tert) -- node[above, font=\scriptsize]{pillar results} (main);
+    \draw[arrow] (main) -- (out);
+  \end{tikzpicture}}
+  \caption{Agent Eval Pipeline Flowchart}
+  \label{fig:flowchart}
 \end{figure}
 
 \section{Final Architecture Design}
 
-Based on the insights gained during the Proof of Concept (PoC) phase, a custom frontend observability architecture was designed. The architecture follows a telemetry-driven approach in which frontend events are collected, processed, transformed, stored, and visualized through a centralized observability pipeline.
+Based on the insights gained during the Proof of Concept phase, a custom three agent evaluation architecture was designed. The architecture follows a state machine driven approach in which the evaluation input flows through three sequential judge agents, with each agent producing structured output that is consumed by the next stage.
 
 The major components of the architecture and their responsibilities are summarized in Table~\ref{tab:architecture-components}.
-\n
+
 \begin{table}[h]
 \centering
-\caption{Major Components of the Observability Platform}
+\caption{Major Components of Agent Eval}
 \label{tab:architecture-components}
 \begin{tabular}{|p{6cm}|p{10cm}|}
 \hline
 \textbf{Component} & \textbf{Responsibility} \\
 \hline
 
-Faro SDK &
-Frontend instrumentation and telemetry generation. Captures user interactions, errors, performance metrics, and application events from the frontend application.
+Child Agent &
+Generates evaluation criteria from the provided input and output. Defines what a good output should look like before any scoring takes place.
 \\
 \hline
 
-Grafana Alloy &
-Collects telemetry data from multiple sources and forwards it to downstream observability components for further processing and storage.
+Tertiary Agent &
+Runs the strict governance check across fifteen evaluators organized into five pillars. Identifies violations, evidence, and risk levels.
 \\
 \hline
 
-OpenTelemetry &
-Provides a standardized framework for generating, collecting, and transporting telemetry data across the observability ecosystem.
+Main Agent &
+Synthesizes the final evaluation result by combining the criteria scores and the governance findings into a single numerical score and verdict.
 \\
 \hline
 
-Logstash &
-Processes, transforms, enriches, and formats telemetry data before forwarding it to the storage layer.
+Final Comparison Agent &
+Used only in multi model evaluation. Compares the independent results produced by each model and produces a consensus verdict.
 \\
 \hline
 
-OpenSearch &
-Serves as the centralized storage and indexing engine for logs and telemetry data, enabling efficient querying and analysis.
+LillyGatewayLLM Client &
+Manages authentication with the internal LLM Gateway using Microsoft OAuth2 and provides a unified interface for invoking GPT 5 and Claude Sonnet.
 \\
 \hline
 
-Grafana &
-Provides dashboards, visualizations, and monitoring interfaces for analyzing frontend performance, errors, and user behavior.
+Cost Tracker &
+Tracks input and output tokens for every step of the pipeline and estimates the corresponding cost based on configurable per model pricing.
 \\
 \hline
 
-Alerting Layer &
-Generates proactive notifications and alerts based on predefined thresholds, anomalies, or critical application events.
+HTML Report Generator &
+Generates a self contained interactive HTML report summarizing the evaluation result, including scores, evidence, violations, and cost breakdown.
 \\
 \hline
 
@@ -645,87 +684,144 @@ Generates proactive notifications and alerts based on predefined thresholds, ano
 
 \newpage
 
-Regular check-ins with the mentor ensured alignment with organizational expectations and technical standards. The mentor provided requirement specifications, reviewed implementation decisions at key milestones, and offered guidance whenever design or technical challenges were encountered. This structure encouraged independent problem-solving while maintaining appropriate oversight and direction throughout the project lifecycle.
+Regular check-ins with the mentor ensured alignment with organizational expectations and technical standards. The mentor provided requirement specifications, reviewed implementation decisions at key milestones, and offered guidance whenever design or technical challenges were encountered. This structure encouraged independent problem solving while maintaining appropriate oversight and direction throughout the project lifecycle.
 
 \subsection{End-to-End Data Flow}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{obsFlow.png}
-  \caption{observability pipeline flow}
-  \label{fig:obsFlow}
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    font=\small,
+    stage/.style={rectangle, rounded corners, draw=black, thick, minimum width=3.6cm, minimum height=1.1cm, align=center, fill=blue!10},
+    side/.style={rectangle, rounded corners, draw=black!60, dashed, minimum width=3.2cm, minimum height=0.8cm, align=center, fill=orange!15, font=\footnotesize},
+    pillar/.style={rectangle, rounded corners, draw=black!60, minimum width=2.2cm, minimum height=0.55cm, align=center, fill=red!12, font=\scriptsize},
+    io/.style={trapezium, trapezium left angle=70, trapezium right angle=110, draw, minimum width=2.2cm, minimum height=0.9cm, fill=gray!15, align=center},
+    outbox/.style={rectangle, rounded corners, draw=black, thick, minimum width=3.0cm, minimum height=1.0cm, align=center, fill=green!15},
+    arrow/.style={-{Stealth[length=2.5mm]}, thick},
+    dasharrow/.style={-{Stealth[length=2.0mm]}, dashed, thick, draw=black!60}
+  ]
+    % Main pipeline (vertical, left column)
+    \node[io] (input) {User Input\\\& Agent Output};
+    \node[stage, below=0.5cm of input] (child) {Child Agent\\\footnotesize Criteria Generation};
+    \node[stage, below=0.6cm of child] (tert) {Tertiary Agent\\\footnotesize 15 Governance Evaluators};
+    \node[stage, below=0.6cm of tert] (main) {Main Agent\\\footnotesize Final Synthesis};
+    \node[outbox, below=0.5cm of main] (report) {Result Dict\\+ HTML Report};
+
+    % Side: Gateway client
+    \node[side, right=1.6cm of child] (gw) {LillyGatewayLLM\\OAuth2 $\rightarrow$ GPT-5 / Claude};
+
+    % Side: Pillar grid
+    \node[pillar, right=1.4cm of tert, yshift=0.6cm] (p1) {Goal Alignment};
+    \node[pillar, right=0.15cm of p1] (p2) {Compliance};
+    \node[pillar, below=0.12cm of p1] (p3) {Reasoning};
+    \node[pillar, right=0.15cm of p3] (p4) {Tool Safety};
+    \node[pillar, below=0.12cm of p3] (p5) {Robustness};
+
+    % Side: Cost tracker
+    \node[side, right=1.6cm of main] (cost) {CostTracker\\Token \& Cost Accounting};
+
+    % Main pipeline arrows
+    \draw[arrow] (input) -- (child);
+    \draw[arrow] (child) -- node[left, font=\scriptsize]{criteria} (tert);
+    \draw[arrow] (tert) -- node[left, font=\scriptsize]{pillar results} (main);
+    \draw[arrow] (main) -- (report);
+
+    % Gateway used by all 3 agents
+    \draw[dasharrow] (child.east) -- (gw.west);
+    \draw[dasharrow] (tert.east) -- (gw.south west);
+    \draw[dasharrow] (main.east) to[bend right=15] (gw.south);
+
+    % Pillars are produced by tertiary agent
+    \draw[dasharrow] (p5.west) -- (tert.east);
+
+    % Cost tracker accumulates from gateway + flows into report
+    \draw[dasharrow] (gw.south) to[bend left=10] (cost.north);
+    \draw[dasharrow] (cost.south) to[bend left=15] (report.east);
+  \end{tikzpicture}}
+  \caption{End-to-End Data Flow in Agent Eval}
+  \label{fig:data_flow}
 \end{figure}
 
-The architecture was designed to be scalable, vendor-independent, and extensible for future observability requirements.
+The architecture was designed to be modular, vendor independent, and extensible for future evaluation requirements.
 
 \newpage
 
 \section{Architectural Decisions and Customizations}
 
-While several observability tools provide out-of-the-box monitoring capabilities, the requirements of the project extended beyond the functionality offered by default implementations. As a result, multiple architectural customizations were introduced to align the solution with organizational requirements and existing infrastructure.
+While several open source evaluation libraries provide basic LLM as judge capabilities, the requirements of this project extended beyond the functionality offered by default implementations. As a result, multiple architectural decisions were introduced to align the SDK with organizational requirements and the internal model infrastructure.
 
-One of the key design decisions involved leveraging the organization's existing OpenSearch ecosystem instead of introducing a separate logging infrastructure. This reduced deployment complexity, avoided additional operational ownership, and enabled seamless integration with existing monitoring workflows.
+One of the key design decisions involved using LangGraph instead of a plain function call chain. LangGraph enabled predictable execution order, clean state propagation between agents, and a straightforward extension path for adding new agents in the future without rewriting existing code.
 
-Several custom telemetry collection mechanisms were also implemented to improve observability coverage. These included enhanced API instrumentation, custom event classification, structured error categorization, network failure detection, environment-aware monitoring, and telemetry enrichment for improved analytics and debugging capabilities.
+Several custom mechanisms were also implemented to improve reliability and developer experience. These included robust JSON parsing for LLM outputs, automatic handling of markdown code fences returned by the model, interactive prompts for missing parameters, defensive validation of inputs, and a fully self contained HTML report that could be opened without any external dependencies.
 
-These customizations enabled the platform to address organization-specific monitoring requirements while maintaining scalability, flexibility, and operational efficiency.
+These customizations enabled the SDK to address organization specific evaluation requirements while maintaining scalability, flexibility, and operational simplicity.
 
-\section{Frontend Instrumentation}
+\section{Gateway Integration and Authentication}
 
-Frontend instrumentation was implemented using the Grafana Faro SDK. The instrumentation layer was responsible for capturing various types of telemetry data generated by the frontend application.
+All large language model invocations within the SDK are routed through the internal Eli Lilly LLM Gateway. The gateway provides a centrally governed access layer, ensures that only approved models are used, and enforces organizational policies on token usage and access control.
 
-The instrumentation focused on collecting the following information:
+To interact with the gateway, the SDK includes a thin client wrapper that handles token acquisition, request signing, and response normalization. Authentication is performed using the Microsoft OAuth2 client credentials flow, where a short lived access token is obtained from the Microsoft identity platform using the application's client identifier, client secret, and tenant identifier. The token is then attached to every gateway request and refreshed automatically when it expires.
+
+Two model identifiers are supported through the gateway integration:
 
 \begin{itemize}
-    \item JavaScript runtime exceptions.
-    \item API requests and responses.
-    \item Network failures.
-    \item Browser information.
-    \item User session metadata.
-    \item Page navigation events.
-    \item Core Web Vitals.
+    \item gpt5, mapped to a GPT 5 model deployment.
+    \item claude, mapped to a Claude Sonnet model deployment.
 \end{itemize}
 
-Special attention was given to ensuring minimal performance overhead while maintaining comprehensive visibility into frontend application behavior. The instrumentation was designed to operate efficiently without negatively impacting the end-user experience.
+This abstraction allows the rest of the SDK to interact with any approved model without having to manage authentication, retry behavior, or vendor specific request formats. It also makes it straightforward to extend the SDK to new models in the future as additional deployments become available through the gateway.
 
-To achieve complete API visibility, instrumentation was implemented for both Fetch API and XMLHttpRequest (XHR)-based requests, ensuring monitoring coverage across all application components and communication pathways.
+\section{Evaluator Implementation}
 
-\section{Telemetry Collection and Processing}
+The governance evaluator catalog was implemented as a fixed set of fifteen evaluators organized into five pillars. Each evaluator is defined by a name, a short description, a pillar assignment, and a scoring rubric that the judge model follows during evaluation.
 
-Once generated within the browser, telemetry data is forwarded through a centralized processing pipeline for collection, transformation, storage, and analysis.
+The catalog was designed to capture the most important governance dimensions of agentic outputs:
 
-Grafana Alloy acts as the telemetry collection layer and forwards the collected data using OpenTelemetry standards. Logstash performs data transformation, enrichment, filtering, and routing before storing the processed records within OpenSearch. This processing pipeline ensures that telemetry data remains structured, searchable, and suitable for visualization and monitoring purposes.
+\begin{itemize}
+    \item Goal Alignment, covering role adherence, goal drift, and objective completion.
+    \item Compliance, covering policy violation and guardrail checks.
+    \item Reasoning, covering hallucination, logical consistency, and counterfactual handling.
+    \item Tool Safety, covering prompt injection, data exposure, and tool necessity.
+    \item Robustness, covering determinism, output consistency, and variance analysis.
+\end{itemize}
 
-The use of OpenTelemetry as the telemetry backbone provides a standardized and future-proof mechanism for collecting, transporting, and processing observability data across different components of the platform.
+Special attention was given to ensuring that each evaluator produced a structured response with a score, a passed flag, and reasoning, so that downstream aggregation could be performed in a deterministic way. The evaluator design was kept declarative so that adding or modifying evaluators in the future would require minimal changes to the surrounding pipeline.
 
-The primary categories of telemetry data collected during the project are summarized in Table~\ref{tab:telemetry-classification}.
+\section{Pipeline Execution and Scoring}
+
+Once the SDK receives an input and output, the evaluation request is forwarded through the three agent pipeline. The child agent produces a set of criteria specific to the provided input and output. The tertiary agent runs the governance evaluator catalog and produces per evaluator scores along with violations and evidence. The main agent then synthesizes a final score and verdict based on both the criteria scores and the governance findings.
+
+The execution pipeline ensures that evaluation requests remain structured, reproducible, and easy to inspect. Each step writes its output into a shared state object, which is later used both for the final scoring step and for generating the interactive report.
+
+The primary categories of data produced by the pipeline are summarized in Table~\ref{tab:pipeline-output}.
 
 \begin{table}[h]
 \centering
-\caption{Telemetry Data Classification}
-\label{tab:telemetry-classification}
+\caption{Pipeline Output Categories}
+\label{tab:pipeline-output}
 \begin{tabular}{|p{6cm}|p{10cm}|}
 \hline
 \textbf{Data Type} & \textbf{Purpose} \\
 \hline
 
-Event &
-Used for analytics, user activity tracking, and application monitoring.
+Criteria Scores &
+Per criterion numerical scores generated by the main agent based on the criteria produced earlier in the pipeline.
 \\
 \hline
 
-Exception &
-Used for identifying, diagnosing, and debugging application errors and failures.
+Specialized Results &
+Per evaluator governance findings, including score, passed flag, reasoning, evidence, and severity.
 \\
 \hline
 
-Measurement &
-Used for collecting performance metrics and monitoring application health indicators.
+Final Score and Verdict &
+Aggregated numerical score on a zero to one hundred scale, along with a pass or fail verdict based on the configured threshold.
 \\
 \hline
 
-Log &
-Used for capturing console messages, application logs, and operational information.
+Cost Information &
+Total input and output tokens used across the pipeline, along with the estimated dollar cost computed using the configured per model pricing.
 \\
 \hline
 
@@ -734,139 +830,209 @@ Used for capturing console messages, application logs, and operational informati
 
 \newpage
 
-\section{Monitoring Implementation}
+\section{Governance Pillar Implementation}
 
-The observability platform was designed to provide comprehensive visibility across multiple operational dimensions of the frontend application. Different monitoring capabilities were implemented to ensure effective tracking of application health, performance, reliability, and user experience.
+The governance pillars were implemented to ensure that agentic outputs are assessed across the dimensions that matter most for enterprise deployments. Different pillars cover different categories of risk and quality.
 
-\subsection{Error Monitoring}
+\begin{figure}[h]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    font=\small,
+    pillar/.style={rectangle, rounded corners, draw=black, thick, minimum width=3.0cm, minimum height=0.9cm, align=center},
+    eval/.style={rectangle, rounded corners, draw=black!50, minimum width=2.8cm, minimum height=0.6cm, align=center, font=\footnotesize},
+    ga/.style={pillar, fill=violet!20},
+    ga2/.style={eval, fill=violet!8},
+    cp/.style={pillar, fill=blue!20},
+    cp2/.style={eval, fill=blue!8},
+    rs/.style={pillar, fill=green!20},
+    rs2/.style={eval, fill=green!8},
+    ts/.style={pillar, fill=orange!25},
+    ts2/.style={eval, fill=orange!10},
+    rb/.style={pillar, fill=pink!25},
+    rb2/.style={eval, fill=pink!10},
+    line/.style={-, draw=black!60}
+  ]
+    % Pillar headers (top row)
+    \node[ga] (p1) at (0, 0) {Goal\\Alignment};
+    \node[cp, right=0.4cm of p1] (p2) {Compliance};
+    \node[rs, right=0.4cm of p2] (p3) {Reasoning};
+    \node[ts, right=0.4cm of p3] (p4) {Tool Safety};
+    \node[rb, right=0.4cm of p4] (p5) {Robustness};
 
-The error monitoring framework was implemented to capture and analyze application failures and unexpected behaviors. The system collects the following error-related telemetry:
+    % Goal Alignment evaluators
+    \node[ga2, below=0.5cm of p1] (e1a) {role\_adherence};
+    \node[ga2, below=0.15cm of e1a] (e1b) {goal\_drift};
+    \node[ga2, below=0.15cm of e1b] (e1c) {objective\_completion};
 
-\begin{itemize}
-    \item JavaScript exceptions.
-    \item HTTP 4xx errors.
-    \item HTTP 5xx errors.
-    \item Network failures.
-    \item Console errors.
-\end{itemize}
+    % Compliance evaluators
+    \node[cp2, below=0.5cm of p2] (e2a) {policy\_violation};
+    \node[cp2, below=0.15cm of e2a] (e2b) {guardrail\_check};
 
-These insights enable faster root cause analysis and support proactive identification of application issues before they significantly impact users.
+    % Reasoning evaluators
+    \node[rs2, below=0.5cm of p3] (e3a) {hallucination};
+    \node[rs2, below=0.15cm of e3a] (e3b) {logical\_consistency};
+    \node[rs2, below=0.15cm of e3b] (e3c) {counterfactual};
 
-\subsection{API Monitoring}
+    % Tool Safety evaluators
+    \node[ts2, below=0.5cm of p4] (e4a) {prompt\_injection};
+    \node[ts2, below=0.15cm of e4a] (e4b) {data\_exposure};
+    \node[ts2, below=0.15cm of e4b] (e4c) {tool\_necessity};
 
-API monitoring capabilities were implemented to provide visibility into backend communication and service performance. The system tracks:
+    % Robustness evaluators
+    \node[rb2, below=0.5cm of p5] (e5a) {determinism};
+    \node[rb2, below=0.15cm of e5a] (e5b) {output\_consistency};
+    \node[rb2, below=0.15cm of e5b] (e5c) {variance\_analysis};
 
-\begin{itemize}
-    \item API latency.
-    \item Request volume.
-    \item Success and failure rates.
-    \item Slow APIs.
-    \item Endpoint-level analytics.
-\end{itemize}
+    % Connecting lines
+    \draw[line] (p1.south) -- (e1a.north);
+    \draw[line] (p2.south) -- (e2a.north);
+    \draw[line] (p3.south) -- (e3a.north);
+    \draw[line] (p4.south) -- (e4a.north);
+    \draw[line] (p5.south) -- (e5a.north);
+  \end{tikzpicture}}
+  \caption{Governance Evaluator Catalog: Fifteen Evaluators Across Five Pillars}
+  \label{fig:evaluator_catalog}
+\end{figure}
 
-This information helps identify performance bottlenecks, unstable endpoints, and service degradation trends.
+\subsection{Goal Alignment}
 
-\subsection{Performance Monitoring}
-
-Frontend performance monitoring was implemented using Core Web Vitals and browser performance indicators. The following metrics are continuously monitored:
-
-\begin{itemize}
-    \item Largest Contentful Paint (LCP).
-    \item First Contentful Paint (FCP).
-    \item Time to First Byte (TTFB).
-    \item Cumulative Layout Shift (CLS).
-    \item Interaction to Next Paint (INP).
-\end{itemize}
-
-These metrics provide insights into application responsiveness, rendering efficiency, and overall user experience.
-
-\subsection{User Session Analytics}
-
-Session-level telemetry is collected to understand user behavior and application usage patterns. The collected insights include:
-
-\begin{itemize}
-    \item User behavior patterns.
-    \item Browser distribution.
-    \item Device information.
-    \item Navigation trends.
-\end{itemize}
-
-These analytics support data-driven decision-making and help identify opportunities for improving usability, performance, and user engagement.
-
-\section{Visualization and Dashboard Development}
-
-To enable effective operational monitoring and troubleshooting, centralized dashboards were developed using Grafana. These dashboards provide real-time visibility into frontend application behavior, system performance, user activity, and operational health.
-
-The dashboards were designed to present the following insights:
-
-\begin{itemize}
-    \item Application health overview.
-    \item API performance analytics.
-    \item Error trends and distribution.
-    \item User session statistics.
-    \item Browser and operating system insights.
-    \item Performance metrics visualization.
-\end{itemize}
-
-The dashboard design was structured to support both high-level operational monitoring and detailed root-cause analysis. High-level dashboards provide a consolidated view of system health and key performance indicators, while detailed dashboards enable engineers to investigate specific issues, analyze trends, and identify potential bottlenecks within the application.
-
-The centralized visualization layer significantly improves observability by transforming raw telemetry data into actionable insights, enabling faster troubleshooting, improved decision-making, and proactive system monitoring.
-
-\section{Alerting and Operational Monitoring}
-
-Real-time alerting mechanisms were implemented as part of the observability platform to proactively identify critical incidents and operational anomalies. The alerting framework continuously monitors telemetry data and generates notifications whenever predefined thresholds or conditions are violated.
-
-Alerting rules were configured for the following scenarios:
+The goal alignment pillar verifies that the agent operated within its defined scope and successfully completed the requested task. The system collects the following information:
 
 \begin{itemize}
-    \item Increased frontend error rates.
-    \item API latency threshold breaches.
-    \item Excessive failed requests.
-    \item Application health degradation.
+    \item Whether the agent stayed within its defined role boundaries.
+    \item Whether the agent strayed from the original objective.
+    \item Whether the agent fully completed the requested task without missing components.
 \end{itemize}
 
-These alerts provide early visibility into potential issues, allowing engineering teams to respond quickly before they significantly impact end users. By automating incident detection, the platform reduces the time required for investigation, troubleshooting, and resolution.
+These insights help identify agents that wander off topic, exceed their authority, or leave parts of the task unfinished.
 
-The integration of alerting with the centralized monitoring system ensures continuous operational awareness and supports a proactive approach to maintaining application reliability, performance, and user experience.
+\subsection{Compliance}
+
+The compliance pillar checks that the agent's output respects enterprise policies and safety guardrails. The system tracks:
+
+\begin{itemize}
+    \item Possible policy violations such as unauthorized data sharing or prohibited content.
+    \item Attempts to bypass restrictions or ignore safety protocols.
+\end{itemize}
+
+This information helps identify outputs that may carry regulatory, ethical, or operational risk.
+
+\subsection{Reasoning}
+
+The reasoning pillar evaluates the soundness of the agent's logic. The following dimensions are continuously checked:
+
+\begin{itemize}
+    \item Hallucinations, including fabricated statistics, citations, or entities.
+    \item Logical consistency, including contradictions and non sequiturs.
+    \item Counterfactual handling, including the agent's treatment of hypothetical scenarios.
+\end{itemize}
+
+These checks provide insight into whether the agent's conclusions are trustworthy and well supported.
+
+\subsection{Tool Safety}
+
+Tool safety analysis is conducted to understand how the agent interacts with external tools and how it handles untrusted inputs. The collected insights include:
+
+\begin{itemize}
+    \item Prompt injection attempts contained in the input.
+    \item Potential data exposure in the output.
+    \item Appropriateness of tool usage and reliance.
+\end{itemize}
+
+These analytics support decisions about whether the agent can be safely connected to additional tools or sensitive data sources.
+
+\subsection{Robustness}
+
+The robustness pillar examines whether the agent produces stable, consistent, and predictable outputs across similar inputs. The following dimensions are checked:
+
+\begin{itemize}
+    \item Determinism, including erratic or random variations in behavior.
+    \item Output consistency, including stability of format, tone, and structure.
+    \item Variance analysis, including subtle inconsistencies that may indicate unreliable behavior.
+\end{itemize}
+
+These checks help identify agents that may behave unpredictably in production and provide an early warning when outputs drift between runs.
+
+\section{HTML Report Generation}
+
+To enable effective inspection of evaluation results, a self contained HTML report is generated for every run. The report is rendered as a single HTML file that can be opened directly in a browser without any additional dependencies.
+
+The reports were designed to present the following insights:
+
+\begin{itemize}
+    \item Overall score and pass or fail verdict.
+    \item Risk level summary based on governance findings.
+    \item Per criterion score breakdown with reasoning.
+    \item Per evaluator results across all five pillars.
+    \item Violations and evidence supporting any failed checks.
+    \item Token usage and estimated cost for the evaluation.
+\end{itemize}
+
+The report layout was structured to support both quick high level inspection and detailed root cause analysis. High level sections provide a consolidated view of the verdict and risk, while detailed sections allow engineers to investigate specific evaluators, review their evidence, and understand exactly why a particular check passed or failed.
+
+\section{Multi Model Consensus}
+
+Multi model consensus evaluation was implemented to reduce single model bias and increase confidence in the final verdict. When the SDK is invoked with a list of models, the full three agent pipeline is executed independently for each model.
+
+A separate final comparison agent then compares the per model results and produces a consensus verdict:
+
+\begin{itemize}
+    \item Independent execution of the full pipeline for each model.
+    \item Comparison of criteria scores and governance findings across models.
+    \item Identification of points of agreement and disagreement.
+    \item Weighted averaging based on reasoning quality.
+    \item Generation of a final consensus verdict and confidence label.
+\end{itemize}
+
+The integration of consensus evaluation with the rest of the SDK ensures that users gain access to advanced multi model judging without having to manage orchestration logic themselves.
+
+\section{Cost and Token Tracking}
+
+Token usage and cost tracking are integrated into every evaluation. A dedicated cost tracker is created at the start of each evaluation run and is invoked at each stage of the pipeline. For every step, the tracker estimates the number of input and output tokens consumed and computes the corresponding cost based on per model pricing configured through environment variables.
+
+The cost tracker maintains a per stage breakdown alongside an overall total. At the end of the evaluation, the tracker is serialized into the final result object and surfaced in the generated HTML report. This provides users with full visibility into the operational expense of every evaluation, supports cost analysis when running large evaluation batches, and helps teams reason about whether multi model consensus is justified for a given use case.
+
+By embedding cost tracking directly into the SDK rather than relying on external billing dashboards, engineers receive immediate feedback on token consumption as soon as an evaluation completes. This was particularly valuable during development, where comparing the cost profile of different evaluator configurations informed both prompt design and default pipeline behavior.
 
 \section{Deployment and Validation}
 
-Following the implementation of the observability platform, the completed framework was integrated with the target frontend application and deployed across the required environments. Comprehensive validation activities were conducted to ensure the reliability, accuracy, and effectiveness of the overall solution.
+Following the implementation of the SDK, the completed framework was packaged as a Python wheel and integrated with the target evaluation workflows. Comprehensive validation activities were conducted to ensure the reliability, accuracy, and effectiveness of the overall solution.
 
 The validation process focused on verifying the following aspects:
 
 \begin{itemize}
-    \item Accuracy of telemetry collection.
-    \item Correctness of dashboard metrics.
-    \item Reliability of data pipelines.
-    \item Alert generation behavior.
-    \item End-to-end observability coverage.
+    \item Correctness of criteria generation across diverse inputs.
+    \item Reliability of governance evaluator scoring.
+    \item Consistency of final score aggregation.
+    \item Correctness of multi model consensus behavior.
+    \item Stability of cost tracking and report generation.
 \end{itemize}
 
-Testing was performed across multiple scenarios to confirm that telemetry data was correctly captured, processed, stored, and visualized throughout the observability pipeline. Additional validation ensured that alerting mechanisms were triggered appropriately when predefined conditions and thresholds were met.
+Testing was performed across multiple scenarios involving diverse agent inputs and outputs of varying complexity, length, and domain. The validation set was designed to cover both well behaved outputs and intentionally degraded outputs in order to confirm that the scoring pipeline reacted appropriately and that violations were surfaced with accurate evidence. Additional validation ensured that the generated HTML report rendered correctly across different browsers and operating systems.
 
-Successful validation confirmed that the platform was capable of providing comprehensive visibility into frontend application behavior while maintaining reliable telemetry processing and monitoring capabilities.
+Successful validation confirmed that the SDK was capable of providing reliable, structured, and reproducible evaluations of agentic outputs while maintaining a clean developer experience.
 
 % ============================================================
 %  6.  OBSERVATIONS AND FINDINGS
 % ============================================================
 \chapter{Observations and Findings}
 
-The implemented frontend observability platform successfully provided real-time visibility into application behavior, performance, and operational health. The collected telemetry data enabled centralized monitoring and analysis of frontend activities across different environments.
+The implemented Agent Eval SDK successfully provided structured, governance aware evaluation of agentic outputs. The generated results enabled centralized review of agent behavior across different use cases and provided a consistent basis for quality assessment within the team.
 
-The developed dashboards provided actionable insights into frontend errors, API performance, user sessions, browser distribution, and Core Web Vitals. These visualizations simplified troubleshooting activities and improved the ability to identify issues affecting application reliability and user experience.
+The interactive HTML reports provided actionable insights into criteria scores, governance findings, violations, evidence, and cost information. These visualizations simplified the review process and improved the ability to identify issues affecting agent reliability, safety, and accuracy.
 
 \section{Key Observations}
 
-The implementation and validation phases resulted in several important observations regarding the effectiveness of the observability platform:
+The implementation and validation phases resulted in several important observations regarding the effectiveness of the SDK:
 
 \begin{itemize}
-    \item Frontend errors and exceptions could be tracked centrally without relying on manual user reports.
-    \item API performance metrics enabled identification of slow or failing endpoints.
-    \item Session analytics provided better visibility into user activity and browser usage patterns.
-    \item Core Web Vitals monitoring helped evaluate frontend performance from the end-user perspective.
-    \item Centralized logs improved debugging and root-cause analysis capabilities.
-    \item Real-time dashboards enabled faster issue detection and operational monitoring.
+    \item Agentic outputs could be scored consistently without relying on manual review by engineers.
+    \item Governance focused evaluators enabled early detection of risky or non compliant behavior.
+    \item Multi model consensus reduced the impact of single model bias on the final verdict.
+    \item Interactive HTML reports significantly improved the speed of result review and triage.
+    \item Cost tracking provided a clear picture of the operational expense of running large scale evaluations.
+    \item The single function entry point made the SDK easy to integrate into existing pipelines.
 \end{itemize}
 
 \section{Key Findings}
@@ -874,91 +1040,87 @@ The implementation and validation phases resulted in several important observati
 Based on the implementation, testing, and operational observations, the following key findings were identified:
 
 \begin{itemize}
-    \item A dedicated frontend observability framework significantly improves visibility into client-side application behavior.
-    \item Combining telemetry collection, centralized storage, and dashboarding creates a unified monitoring experience.
-    \item Structured observability data reduces troubleshooting effort and accelerates issue resolution.
-    \item The implemented architecture provides a scalable foundation for future monitoring and analytics requirements.
+    \item A dedicated evaluation SDK significantly improves the consistency and explainability of agent assessment.
+    \item Combining criteria generation, governance evaluation, and final synthesis creates a unified review experience.
+    \item Structured evaluation output reduces ambiguity during quality discussions and accelerates iteration.
+    \item The implemented architecture provides a scalable foundation for future evaluators and judging strategies.
 \end{itemize}
 
 \section{Operational and Cost Benefits}
 
-A significant outcome of the project was the ability to deliver enterprise-grade frontend observability while leveraging existing organizational infrastructure.
+A significant outcome of the project was the ability to deliver enterprise grade agentic evaluation while leveraging existing organizational infrastructure.
 
-By integrating with the existing OpenSearch ecosystem and adopting open-source observability technologies, the solution avoided the need for onboarding additional commercial monitoring platforms. This eliminated recurring licensing costs, reduced procurement overhead, and avoided the operational effort associated with managing separate observability infrastructures.
+By integrating with the internal LLM Gateway and reusing internally approved models, the solution avoided the need to onboard additional commercial evaluation platforms. This eliminated recurring licensing costs, reduced procurement overhead, and avoided the operational effort associated with managing separate vendor relationships.
 
-The resulting architecture provides a cost-effective and scalable monitoring solution while retaining full control over telemetry data, customization capabilities, and future expansion opportunities.
+The resulting SDK provides a cost effective and scalable evaluation solution while retaining full control over evaluator design, scoring logic, and future expansion opportunities.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=1.0\textwidth]{grafana1.png}
-  \caption{Grafana Dashboard}
-  \label{fig:grafana1}
+  \includegraphics[width=1.0\textwidth]{html_report.png}
+  \caption{Agent Eval HTML Evaluation Report}
+  \label{fig:html_report}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=1.0\textwidth]{grafana2.png}
-  \caption{Grafana Dashboard}
-  \label{fig:grafana2}
+  \includegraphics[width=1.0\textwidth]{pillar_breakdown.png}
+  \caption{Governance Pillar Breakdown}
+  \label{fig:pillar_breakdown}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=1.0\textwidth]{kibana.png}
-  \caption{Opensearch Dashboard - Logs}
-  \label{fig:kibana}
+  \includegraphics[width=1.0\textwidth]{multi_model_consensus.png}
+  \caption{Multi Model Consensus Result}
+  \label{fig:multi_model_consensus}
 \end{figure}
 
 \newpage
 % ============================================================
-%  7.  CHALLENGES AND LEARNINGS
-% ============================================================
-
-% ============================================================
-%  8.  LIMITATIONS
+%  7.  LIMITATIONS
 % ============================================================
 \chapter{Limitations}
 
-While the implemented frontend observability platform provides comprehensive visibility into web application behavior, certain limitations remain within the scope of the current implementation.
+While the implemented Agent Eval SDK provides comprehensive evaluation of agentic outputs, certain limitations remain within the scope of the current implementation.
 
-The solution has been designed and validated primarily for web-based frontend applications. Extending the same observability framework to mobile applications would require additional research, platform-specific instrumentation, and integration with mobile telemetry collection mechanisms.
+The solution has been designed and validated primarily for text based agent outputs. Extending the same evaluation framework to multi modal outputs such as images, audio, or video would require additional research, format specific evaluators, and integration with model specific judging capabilities.
 
-Although the platform captures session-level analytics, application events, errors, and performance metrics, it does not provide complete user journey replay or detailed click-by-click traceability for individual users. Advanced capabilities such as session replay, interaction heatmaps, and detailed user navigation reconstruction were intentionally kept outside the scope of the project.
+Although the SDK captures rich governance findings, score breakdowns, and cost information, it does not currently provide longitudinal tracking of evaluations across runs or detailed per agent regression analysis. Advanced capabilities such as persistent evaluation history, cross run comparison, and trend dashboards were intentionally kept outside the scope of this project.
 
-The observability data available within the platform is limited to the telemetry explicitly instrumented within the application. Additional business-specific events, custom analytics requirements, and domain-specific monitoring needs would require further instrumentation, configuration, and validation efforts.
+The evaluation quality available through the SDK is bounded by the capabilities and biases of the underlying judge models. Any limitations or blind spots present in the judge models may carry over into the evaluation results, particularly in highly specialized domains.
 
-Furthermore, the effectiveness of monitoring and alerting depends on the quality and completeness of the instrumentation implemented within the application. Any uninstrumented components or events may reduce overall observability coverage.
+Furthermore, the effectiveness of governance evaluators depends on the quality of the prompts and rubrics used to drive them. Any uncovered scenarios or under specified rubrics may reduce the depth of analysis for certain types of outputs.
 
-Despite these limitations, the implemented solution successfully achieves the primary objective of providing centralized frontend monitoring, operational visibility, and proactive issue detection for web applications. The platform establishes a strong foundation for future enhancements and expansion of observability capabilities.
+Despite these limitations, the implemented solution successfully achieves the primary objective of providing structured, governance aware, and reproducible evaluation of agentic outputs. The SDK establishes a strong foundation for future enhancements and expansion of evaluation capabilities.
 
 \chapter{Conclusion and Future Work}
 
 \section{Conclusion}
 
-The project successfully achieved its objective of designing and implementing a comprehensive frontend observability platform for Birla Pivot. Through a structured approach involving requirement analysis, proof-of-concept development, architecture evaluation, and production implementation, a scalable and vendor-independent observability solution was established.
+The project successfully achieved its objective of designing and implementing a reusable SDK for evaluating agentic AI outputs at Eli Lilly. Through a structured approach involving requirement analysis, proof of concept development, architecture design, and production implementation, a scalable and vendor independent evaluation solution was established.
 
-The implemented platform provides centralized visibility into frontend errors, API performance, application health, user sessions, and performance metrics. By integrating telemetry collection, processing, storage, visualization, and alerting into a unified framework, the solution enables faster issue detection, improved troubleshooting, and enhanced operational monitoring.
+The implemented SDK provides structured visibility into criteria scores, governance findings, violations, evidence, and cost information. By integrating criteria generation, governance evaluation, final synthesis, and reporting into a unified framework, the solution enables faster review, more consistent quality assessment, and stronger confidence before deploying agentic features to production.
 
-Beyond the technical implementation, the project provided valuable experience in system design, observability engineering, monitoring architectures, and cross-functional collaboration. The successful deployment of the platform establishes a strong foundation for future observability initiatives and contributes to improving the reliability, maintainability, and operational efficiency of web applications within the organization. Additionally, the project demonstrated that enterprise-grade frontend observability can be achieved through a carefully designed, vendor-independent architecture that leverages existing organizational infrastructure, thereby reducing both operational complexity and long-term cost.
+Beyond the technical implementation, the project provided valuable experience in applied AI engineering, system design, prompt engineering for judge agents, and cross functional collaboration. The successful packaging of the SDK as a reusable Python wheel establishes a strong foundation for future evaluation initiatives and contributes to improving the reliability, governance, and maintainability of agentic AI workflows within the organization. The project also demonstrated that enterprise grade evaluation can be achieved through a carefully designed, vendor independent architecture that leverages existing organizational infrastructure, thereby reducing both operational complexity and long term cost.
 
 \section{Future Work}
 
 Although the current implementation fulfills the primary project objectives, several enhancements can be explored in the future:
 
 \begin{itemize}
-\item Extension of the observability framework to mobile applications through platform-specific instrumentation and telemetry collection mechanisms.
+\item Extension of the evaluation framework to multi modal agent outputs through format specific evaluators and judging strategies.
 
-\item Implementation of user journey replay and click-level interaction tracking to enable deeper behavioral analysis and improve user experience insights.
+\item Implementation of persistent evaluation history, cross run comparison, and regression analysis to support longitudinal quality tracking.
 
-\item Integration of distributed tracing capabilities to provide end-to-end visibility across frontend and backend services.
+\item Integration with continuous integration pipelines to enable automatic evaluation gates for agentic features.
 
-\item Development of advanced anomaly detection and intelligent alerting mechanisms using machine learning and predictive analytics techniques.
+\item Development of adaptive evaluator selection based on the structure and content of the agent output.
 
-\item Expansion of business-specific telemetry and custom analytics capabilities to support additional operational and decision-making use cases.
+\item Expansion of domain specific evaluators to support specialized use cases such as clinical, regulatory, and scientific workflows.
 
 \end{itemize}
 
-These enhancements can further strengthen the observability ecosystem and provide deeper insights into application performance, user behavior, and overall system reliability. The current implementation serves as a scalable foundation upon which future monitoring and analytics capabilities can be continuously expanded and refined.
+These enhancements can further strengthen the evaluation ecosystem and provide deeper insights into agent performance, reliability, and safety. The current implementation serves as a scalable foundation upon which future evaluation and governance capabilities can be continuously expanded and refined.
 
 % ============================================================
 %  BIBLIOGRAPHY / REFERENCES
@@ -967,25 +1129,25 @@ These enhancements can further strengthen the observability ecosystem and provid
 
 \begin{enumerate}
 
-\item Grafana Labs, \textit{Grafana Faro Documentation}. Available at: \url{https://grafana.com/docs/grafana-cloud/monitor-applications/frontend-observability/}
+\item LangChain Inc., \textit{LangGraph Documentation}. Available at: \url{https://langchain-ai.github.io/langgraph/}
 
-\item Grafana Labs, \textit{Grafana Alloy Documentation}. Available at: \url{https://grafana.com/docs/alloy/latest/}
+\item LangChain Inc., \textit{LangChain Documentation}. Available at: \url{https://python.langchain.com/docs/}
 
-\item Grafana Labs, \textit{Grafana Loki Documentation}. Available at: \url{https://grafana.com/docs/loki/latest/}
+\item OpenAI, \textit{OpenAI API and Model Documentation}. Available at: \url{https://platform.openai.com/docs/}
 
-\item OpenTelemetry Authors, \textit{OpenTelemetry Documentation}. Available at: \url{https://opentelemetry.io/docs/}
+\item Anthropic, \textit{Claude Model Documentation}. Available at: \url{https://docs.anthropic.com/}
 
-\item Grafana Labs, \textit{Grafana Documentation}. Available at: \url{https://grafana.com/docs/grafana/latest/}
+\item Zheng, L. et al., \textit{Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena}, 2023. Available at: \url{https://arxiv.org/abs/2306.05685}
 
-\item Elastic N.V., \textit{Kibana Guide and Documentation}. Available at: \url{https://www.elastic.co/guide/en/kibana/index.html}
+\item Liu, Y. et al., \textit{G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment}, 2023. Available at: \url{https://arxiv.org/abs/2303.16634}
 
-\item OpenSearch Software Foundation, \textit{OpenSearch Documentation}. Available at: \url{https://opensearch.org/docs/latest/}
+\item Microsoft, \textit{Microsoft Identity Platform and OAuth 2.0 Authorization}. Available at: \url{https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow}
 
-\item Elastic N.V., \textit{Logstash Reference Documentation}. Available at: \url{https://www.elastic.co/guide/en/logstash/current/index.html}
+\item Python Software Foundation, \textit{Python Packaging User Guide}. Available at: \url{https://packaging.python.org/}
 
-\item Grafana Labs, \textit{Grafana Dashboard Documentation}. Available at: \url{https://grafana.com/docs/grafana/latest/dashboards/}
+\item Pydantic, \textit{Pydantic Documentation}. Available at: \url{https://docs.pydantic.dev/}
 
-\item Mozilla Contributors, \textit{MDN Web Docs - Web Performance APIs and Core Web Vitals}. Available at: \url{https://developer.mozilla.org/}
+\item Eli Lilly and Company, \textit{Internal LLM Gateway Documentation (Restricted Access)}.
 
 \end{enumerate}
 
@@ -993,7 +1155,7 @@ These enhancements can further strengthen the observability ecosystem and provid
 \chapter{Peer Review}
 
 \begin{center}
-    \includegraphics[height=0.85\textheight]{Rachit_Bansal_PeerReview.pdf}
+    \includegraphics[height=0.85\textheight]{Arnav_Jain_PeerReview.pdf}
 \end{center}
 
 \newpage

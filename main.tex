@@ -351,21 +351,34 @@ Certified by
 % ============================================================
 \chapter{Company Profile}
 
-\section{Overview of the Company}
+\section{Overview}
 
-Eli Lilly and Company is a global pharmaceutical organization headquartered in Indianapolis, Indiana, with operations across more than one hundred countries. Founded in 1876, the company has built a strong reputation for developing medicines in areas such as diabetes, oncology, immunology, and neuroscience. In addition to its core pharmaceutical research and development activities, Eli Lilly invests heavily in digital transformation, data science, and applied artificial intelligence to accelerate drug discovery, improve clinical workflows, and modernize enterprise operations.
+Eli Lilly and Company is a global pharmaceutical organization headquartered in Indianapolis, Indiana. Founded in 1876, the company operates in more than one hundred countries and focuses on medicines for chronic and life threatening conditions. Alongside its core research and development activity, Eli Lilly invests heavily in digital transformation and applied artificial intelligence to accelerate discovery, modernize clinical workflows, and streamline enterprise operations.
 
 \section{Products and Services}
 
-Eli Lilly delivers a wide portfolio of medicines that address chronic conditions and life threatening diseases. Beyond its core pharmaceutical products, the organization operates internal digital platforms that support research, manufacturing, regulatory affairs, and commercial functions. These digital platforms increasingly rely on advanced data analytics, automation, and generative artificial intelligence to support scientific and business decision making.
+Beyond its medicines portfolio, Eli Lilly operates internal digital platforms that support scientific and business decisions. These platforms make heavy use of:
+
+\begin{itemize}
+    \item Advanced data analytics and modern data infrastructure.
+    \item Machine learning and generative AI applications.
+    \item Automated workflows across research, manufacturing, and commercial teams.
+\end{itemize}
 
 \section{Technology and Innovation}
 
-Technology plays a central role at Eli Lilly. The organization invests in cloud infrastructure, modern data platforms, machine learning systems, and large language model based applications. The internal LLM Gateway~\cite{lillygw} provides a governed and centrally managed access layer through which authorized teams can build applications that consume models such as GPT 5~\cite{openai} and Claude Sonnet~\cite{claude}. Continuous innovation is supported through dedicated platforms, internal research teams, and applied artificial intelligence initiatives across the enterprise.
+Technology plays a central role at Eli Lilly, with dedicated investment in cloud infrastructure, data platforms, and LLM based applications. The internal LLM Gateway~\cite{lillygw} provides a governed and centrally managed access layer through which authorized teams can build applications that consume models such as GPT 5~\cite{openai} and Claude Sonnet~\cite{claude}.
 
-\section{Internship Experience and Learning Environment}
+\section{Internship Experience}
 
-My internship at Eli Lilly provided valuable exposure to applied artificial intelligence and enterprise grade software engineering. I worked within a team focused on agentic AI tooling and contributed to the design and implementation of Agent Eval, a Software Development Kit for evaluating agentic workflows. The work environment encouraged technical ownership, structured problem solving, and direct collaboration with senior engineers and stakeholders. The exposure to real production use cases, internal model gateway infrastructure, and governance focused engineering practices made the internship a strong learning experience.
+The internship placed me within a team focused on agentic AI tooling, where I contributed to the design and implementation of Agent Eval. Working with senior engineers and stakeholders on real production use cases provided direct exposure to:
+
+\begin{itemize}
+    \item Applied AI engineering on internal model gateway infrastructure.
+    \item Governance focused engineering practices.
+    \item Enterprise grade software development standards.
+    \item Structured problem solving and technical ownership.
+\end{itemize}
 
 \vspace{0.5cm}
 \begin{figure}[h]
@@ -380,52 +393,40 @@ My internship at Eli Lilly provided valuable exposure to applied artificial inte
 % ============================================================
 \chapter{Introduction}
 
-Agentic artificial intelligence systems have rapidly moved from research prototypes into real production workflows. These systems use large language models to plan, reason, call tools, and produce structured outputs for tasks such as document summarization, information extraction, code generation, and customer support. While the capabilities of these systems continue to grow, the question of how to reliably evaluate their outputs remains largely unsolved. Traditional software testing assumes deterministic behavior, whereas agentic outputs are probabilistic, context dependent, and often free form text.
+Agentic AI systems have moved rapidly from research prototypes into production workflows for tasks such as summarization, extraction, code generation, and support. Their outputs, however, are probabilistic and free form, so traditional deterministic testing cannot reliably assess them. Available open source evaluation libraries also lacked governance focused checks, LLM Gateway integration, and multi model consensus support required inside the organization.
 
-During my internship at Eli Lilly, I worked on building Agent Eval, a Software Development Kit designed to evaluate the outputs of agentic workflows using a Large Language Model based judging approach. The goal of the project was to provide engineering teams with a simple, consistent, and governance aware way to score agentic outputs before deploying them into production systems.
-
-A key challenge during the project was that existing open source evaluation libraries did not align with the organization's requirements. They lacked governance focused evaluators, were not integrated with the internal LLM Gateway, and did not support multi model consensus evaluation. To address these gaps, a custom SDK was designed and implemented from the ground up with a focus on usability, governance, and operational readiness.
-
-The solution involved designing a three agent evaluation pipeline using LangGraph, defining a fixed catalog of fifteen governance evaluators across five pillars, implementing multi model consensus, integrating with the internal LLM Gateway, and generating self contained HTML reports for every evaluation. Technologies such as Python, LangGraph, LangChain, and the internal Eli Lilly LLM Gateway were leveraged to build a reusable and production ready solution.
-
-The resulting SDK provides a structured way to assess agentic outputs, accelerates evaluation cycles, supports governance discussions, and establishes a strong foundation for further automation of agent quality assurance within the organization. Beyond the technical implementation, the project offered valuable exposure to applied artificial intelligence engineering, system design, and modern software development practices used in enterprise environments.
+To close these gaps, this internship delivered \textbf{Agent Eval}: a Python SDK that runs a three agent LangGraph pipeline, applies fifteen governance evaluators across five pillars, supports multi model consensus, integrates with the internal Eli Lilly LLM Gateway, and produces a self contained interactive HTML report for every evaluation. The result is a single reusable entry point that engineering teams can drop into any agentic workflow to obtain a structured, reproducible, and governance aware quality assessment.
 
 % ============================================================
 %  3.  BACKGROUND
 % ============================================================
 \chapter{Background}
 
-\section{LLM as Judge in Modern AI Systems}
+\section{LLM as Judge}
 
-Modern enterprise applications frequently involve large language models that generate free form, complex, or multi step outputs. Evaluating these outputs is fundamentally different from evaluating traditional software. There is rarely a single correct answer, the output may be valid in multiple forms, and the quality depends on factors such as factual accuracy, reasoning soundness, policy compliance, and contextual relevance.
-
-To address this evaluation gap, the LLM as judge approach has emerged as a widely accepted technique~\cite{zheng2023judging, liu2023geval}. In this approach, one or more language models are used to assess the quality of outputs produced by another model or agent. This pattern enables scalable, structured, and explainable evaluation that goes beyond keyword matching or static rules.
+Enterprise applications increasingly rely on LLMs that produce free form or multi step outputs. These outputs rarely have a single correct answer and depend on factors such as factual accuracy, reasoning soundness, and policy compliance. The LLM as judge pattern~\cite{zheng2023judging, liu2023geval}, in which one model assesses the quality of another model's output, has emerged as a scalable and explainable alternative to keyword matching or static rules.
 
 \section{Existing Evaluation Landscape}
 
-At the start of the project, several open source evaluation libraries were available, including frameworks for retrieval augmented generation evaluation, simple LLM scoring, and general purpose testing utilities. While these tools offered useful starting points, they did not fully meet the requirements of the organization. They lacked governance focused evaluators such as prompt injection detection, data exposure checks, and tool necessity analysis. They also did not integrate with the internal Eli Lilly LLM Gateway or support a structured multi model consensus workflow.
+Available open source evaluation libraries offered useful primitives but did not meet the organization's needs: they lacked governance focused evaluators such as prompt injection detection, data exposure checks, and tool necessity analysis, they did not integrate with the internal LLM Gateway, and they did not support structured multi model consensus. In the absence of a suitable tool, failures in agentic workflows were diagnosed through ad hoc engineer review, producing inconsistent assessments and slow feedback cycles.
 
-As a result, diagnosing failures in agentic workflows often required ad hoc review by engineers, leading to inconsistent quality assessments, slow feedback cycles, and limited confidence when promoting agentic features to production.
+\section{Proof of Concept}
 
-\section{Proof of Concept and Technology Evaluation}
+A dedicated PoC was built in an isolated environment to validate the feasibility of an LLM as judge pipeline before committing to a production design. The PoC focused on:
 
-Before committing to a final architecture, a dedicated Proof of Concept (PoC) was developed in an isolated environment. The PoC was used to validate the feasibility of an LLM as judge pipeline, evaluate orchestration frameworks, and explore different evaluator structures before committing to a production design.
+\begin{itemize}
+    \item Evaluating orchestration frameworks for chaining multiple judge agents.
+    \item Validating parsing of structured JSON responses from LLM outputs.
+    \item Studying state propagation between agents across a multi step pipeline.
+    \item Exploring evaluator structures suitable for governance focused checks.
+    \item Comparing single model and multi model evaluation behavior.
+\end{itemize}
 
-The primary objective of the PoC was to evaluate orchestration frameworks for chaining multiple judge agents and to validate the feasibility of generating structured, machine readable scores from natural language judge outputs. During this phase, multiple technologies and architectural patterns were explored, including LangChain~\cite{langchain}, LangGraph~\cite{langgraph}, and direct API calls without orchestration libraries.
-
-The evaluation focused on integration requirements, error handling, observability of internal pipeline state, and the ability to extend the design to support multi model consensus. LangGraph~\cite{langgraph} was ultimately selected because of its native support for state machine based agent orchestration, predictable execution order, and clean separation between agent responsibilities.
-
-In addition to evaluating orchestration frameworks, commercially available evaluation platforms were also studied to understand their capabilities, integration requirements, and operational implications. While these solutions offered several advanced features, their adoption would have introduced additional licensing, onboarding, and long term operational costs along with vendor lock in concerns.
-
-The evaluation ultimately led to the selection of a custom SDK architecture that maximized reuse of internal organizational capabilities while minimizing additional dependencies and operational costs.
-
-The PoC also helped identify potential implementation challenges and provided valuable insights into how judge outputs could be parsed, validated, and aggregated into a consistent scoring scheme. The findings from these experiments established a clearer understanding of project requirements and enabled informed technology selection for the final solution.
-
-In addition to technical validation, the PoC served as an important communication tool between the engineering team and stakeholders. By demonstrating practical evaluation use cases on real internal data, it enabled stakeholders to visualize the proposed solution, provide early feedback, and align on the SDK's scope and roadmap before final implementation.
+The frameworks compared were LangChain~\cite{langchain}, LangGraph~\cite{langgraph}, and direct API calls without orchestration. LangGraph was selected for its native state machine orchestration, predictable execution order, and clean separation between agent responsibilities. Commercial evaluation platforms were also reviewed but ruled out due to licensing cost, onboarding overhead, and vendor lock in, leaving a custom SDK as the preferred direction.
 
 \section{Evaluation Approach Comparison}
 
-As part of the technology evaluation process, different evaluation approaches were compared based on functional capabilities, operational requirements, and long term sustainability.
+Table~\ref{tab:evaluation-comparison} summarizes how a custom SDK compares against off the shelf open source libraries on the criteria that mattered most for this project.
 
 \begin{table}[h]
 \centering
@@ -499,13 +500,21 @@ Lower
 \end{tabular}
 \end{table}
 
-The evaluation demonstrated that a custom built SDK could provide the required evaluation capabilities while offering greater flexibility, reduced operational complexity, and significant long term cost advantages. These findings supported the decision to proceed with the proposed architecture for the implementation phase.
+The comparison confirmed that a custom SDK could deliver the required capabilities with greater flexibility, lower operational complexity, and better long term cost, and this directly informed the implementation approach.
 
-\section{Evolution of Project Requirements}
+\section{Evolution of Requirements and Motivation}
 
-The project initially began with the objective of providing a simple LLM as judge function for scoring agent outputs against a single set of generated criteria. As discussions progressed with engineering teams and stakeholders, the scope expanded significantly.
+The project began as a simple LLM as judge function for scoring outputs against a single set of generated criteria. Stakeholder discussions steadily expanded the scope to include:
 
-Additional requirements emerged around governance specific checks, multi model consensus to reduce single model bias, cost tracking, interactive HTML reports, and a clean Python API that could be embedded inside automated workflows. The project gradually evolved from a basic scoring function into a complete evaluation SDK capable of supporting governance, debugging, and analytical use cases.
+\begin{itemize}
+    \item Governance specific evaluators covering compliance, safety, and reasoning.
+    \item Multi model consensus to reduce single model bias.
+    \item Token and cost tracking for every evaluation run.
+    \item Interactive HTML reports for structured review.
+    \item A clean Python API embeddable in automated workflows.
+\end{itemize}
+
+What started as a scoring function grew into a full evaluation SDK covering governance, debugging, and analytical use cases.
 
 \begin{figure}[h]
     \centering
@@ -514,20 +523,14 @@ Additional requirements emerged around governance specific checks, multi model c
     \label{fig:high_level_architecture}
 \end{figure}
 
-This high level architecture, illustrated in Figure \ref{fig:high_level_architecture}, represents the overall flow of an evaluation request through the Agent Eval SDK.
-
-\section{Motivation for the Project}
-
-The motivation behind this project extended beyond building another evaluation library. It presented an opportunity to work on the practical question of how to safely deploy agentic AI systems within an enterprise environment. Since agentic outputs increasingly drive downstream decisions and business workflows, having a structured and reproducible way to evaluate them is essential.
-
-Unlike traditional feature development, the project required understanding agent behavior, evaluation methodology, prompt engineering for judge agents, and the operational realities of running large language model workloads within a regulated organization. The potential organizational impact of having a unified evaluation framework served as a strong source of motivation. A successful SDK would not only improve confidence in agent outputs but also establish a long term foundation for governance, observability, and quality assurance across applied AI initiatives.
+Figure \ref{fig:high_level_architecture} shows the overall flow of an evaluation request through the SDK. Because agentic outputs increasingly drive downstream decisions in a regulated environment, a reproducible and governance aware evaluation approach provided a strong technical foundation for long term quality assurance across applied AI initiatives.
 
 % ============================================================
 %  4.  OBJECTIVES
 % ============================================================
 \chapter{Objectives}
 
-The primary objective of this project was to design and implement a reusable Software Development Kit capable of evaluating the outputs of agentic AI workflows using a Large Language Model based judging approach. To achieve this goal, the following objectives were defined:
+The following objectives guided the design and implementation of the SDK:
 
 \begin{enumerate}
 
@@ -553,36 +556,38 @@ To integrate the SDK with the internal Eli Lilly LLM Gateway using Microsoft OAu
 % ============================================================
 \chapter{Methodology}
 
-This chapter describes the approach followed to achieve the objectives of the project. The implementation was carried out in multiple phases, beginning with requirement analysis and technology evaluation, followed by architecture design, evaluator implementation, pipeline execution, reporting, and validation.
+The project progressed through requirement analysis, PoC exploration, architecture design, evaluator implementation, pipeline execution, reporting, and validation.
 
-\section{Requirement Analysis and Planning}
+\section{Requirement Analysis}
 
-The project commenced with discussions involving applied AI engineers, platform teams, and stakeholders to identify gaps in existing evaluation tooling and operational challenges encountered while assessing agentic outputs. Multiple categories of agentic workflows were considered, including document summarization, structured information extraction, code generation, and chatbot question answering.
+The project began with discussions involving applied AI engineers, platform teams, and stakeholders to identify gaps in existing evaluation tooling. The categories of agentic workflows considered included:
 
-Based on the identified requirements, a roadmap was prepared to design an evaluation SDK capable of providing structured, governance aware scoring while integrating seamlessly with the internal LLM Gateway and existing engineering workflows. The planned deliverable was a distributable Python package~\cite{pypa} with strict runtime schema validation of both configuration inputs and LLM outputs using Pydantic~\cite{pydantic}, so that the SDK could be consumed reliably by other engineering teams inside the organization.
+\begin{itemize}
+    \item Document summarization pipelines.
+    \item Structured information extraction agents.
+    \item Code generation and refactoring assistants.
+    \item Chatbot and question answering systems.
+\end{itemize}
+
+The planned deliverable was a distributable Python package~\cite{pypa} with strict Pydantic~\cite{pydantic} runtime validation of both configuration inputs and LLM outputs, engineered to integrate cleanly with the internal LLM Gateway.
 
 \section{Proof of Concept Development}
 
-Before introducing any changes into production workflows, a dedicated Proof of Concept (PoC) was developed in a separate local environment.
-
-The PoC focused on the following objectives:
+A separate PoC environment was used before any production commitment. It focused on:
 
 \begin{itemize}
-    \item Evaluating orchestration frameworks for chaining multiple judge agents.
-    \item Validating the parsing of structured JSON responses from LLM outputs.
-    \item Studying state propagation between agents in a multi step pipeline.
-    \item Exploring strategies for governance focused evaluator design.
+    \item Evaluating orchestration frameworks for chaining judge agents.
+    \item Validating structured JSON parsing from LLM outputs.
+    \item Studying state propagation between agents across pipeline stages.
     \item Comparing single model and multi model evaluation behavior.
-    \item Assessing extensibility for additional evaluators in the future.
+    \item Assessing extensibility for future evaluators.
 \end{itemize}
 
-Multiple orchestration approaches and evaluator structures were explored during this phase, helping establish the technical foundation for the final implementation and providing confidence before proceeding towards a production ready solution.
+These experiments established the technical foundation and confidence needed before moving toward a production ready implementation.
 
-\section{Final Architecture Design}
+\section{Final Architecture}
 
-Based on the insights gained during the Proof of Concept phase, a custom three agent evaluation architecture was designed. The architecture follows a state machine driven approach in which the evaluation input flows through three sequential judge agents, with each agent producing structured output that is consumed by the next stage.
-
-The major components of the architecture and their responsibilities are summarized in Table~\ref{tab:architecture-components}.
+Building on the PoC, a three agent, state machine driven architecture was adopted. The evaluation input flows sequentially through three judge agents, each producing structured output consumed by the next. Table~\ref{tab:architecture-components} summarizes the major components and their responsibilities.
 
 \begin{table}[h]
 \centering
@@ -633,11 +638,9 @@ Generates a self contained interactive HTML report summarizing the evaluation re
 
 \newpage
 
-Regular check-ins with the mentor ensured alignment with organizational expectations and technical standards. The mentor provided requirement specifications, reviewed implementation decisions at key milestones, and offered guidance whenever design or technical challenges were encountered. This structure encouraged independent problem solving while maintaining appropriate oversight and direction throughout the project lifecycle.
-
 \subsection{End-to-End Data Flow}
 
-Figure~\ref{fig:data_flow} contrasts the two execution paths supported by the SDK. The single model flow runs the three agent pipeline once against the selected model and derives the final score directly from the criteria averages and governance deductions. The multi model flow runs the same pipeline once per configured model, produces an independent score for each model, and then invokes the final comparison agent to assign quality weights and compute a weighted average. Both flows terminate with the generation of the HTML dashboard and the return of a fully populated result dictionary.
+Figure~\ref{fig:data_flow} contrasts the two execution paths supported by the SDK. The single model flow runs the three agent pipeline once and derives the final score from criteria averages and governance deductions. The multi model flow runs the pipeline once per configured model, produces an independent score for each, and invokes the final comparison agent to compute a weighted consensus. Both flows terminate with dashboard generation and return a fully populated result dictionary.
 
 \begin{figure}[h]
     \centering
@@ -646,13 +649,11 @@ Figure~\ref{fig:data_flow} contrasts the two execution paths supported by the SD
     \label{fig:data_flow}
 \end{figure}
 
-The architecture was designed to be modular, vendor independent, and extensible for future evaluation requirements.
-
 \newpage
 
 \subsection{Component Architecture}
 
-The end to end flow described above is realized by a small set of internal components, each with a well defined responsibility. Figure~\ref{fig:component_arch} shows the module level view of the SDK, including the public entry point, the parameter validation layer, the gateway client, the three agents that make up the single model evaluation pipeline, and the final comparison agent that is invoked only for multi model runs.
+Figure~\ref{fig:component_arch} shows the module level view: the public entry point, parameter validation layer, gateway client, three agents that form the single model pipeline, and the final comparison agent used only in multi model runs.
 
 \begin{figure}[h]
     \centering
@@ -661,44 +662,48 @@ The end to end flow described above is realized by a small set of internal compo
     \label{fig:component_arch}
 \end{figure}
 
-The \texttt{evaluate()} function is the sole public API entry point. It performs parameter validation, decides between single and multi model routing, and triggers the dashboard generation once the pipeline completes. The validation layer is composed of a set of private helpers that check credentials, prompt for missing arguments, verify the pass threshold, validate the requested model or model list, and confirm that the requested evaluators exist in the catalog.
+The internal responsibilities of each component are:
 
-The \texttt{LillyGatewayLLM} client centralizes all interactions with the internal LLM Gateway. It performs OAuth2 authentication using client credentials, resolves the requested model identifier to the corresponding gateway deployment, exposes both raw and JSON aware invocation methods, tracks token consumption, and refreshes access tokens transparently.
-
-The single model evaluation function orchestrates the three agent pipeline. The child agent produces the criteria based on the user input, the tertiary agent runs the full governance evaluator catalog in strict mode, and the main agent computes the per criterion scores that feed into the final verdict.
-
-The final comparison agent is invoked only when the model parameter is a list. It reads the reasoning and governance results produced by each participating model, assigns a percentage weight to each model based on the quality of its reasoning, and computes the final consensus score using a code path that guarantees the weights sum to one hundred. Isolating this logic in a dedicated component keeps the single model path lean while still allowing the SDK to deliver reliable multi model consensus when it is requested.
+\begin{itemize}
+    \item \textbf{\texttt{evaluate()} entry point.} Validates parameters, routes between single and multi model paths, and triggers dashboard generation.
+    \item \textbf{Validation layer.} Checks credentials, prompts for missing arguments, verifies the pass threshold, and confirms that requested models and evaluators exist.
+    \item \textbf{\texttt{LillyGatewayLLM} client.} Handles OAuth2 authentication, resolves model identifiers to gateway deployments, exposes raw and JSON aware invocation, and refreshes tokens transparently.
+    \item \textbf{Child agent.} Generates evaluation criteria from the input and output before any scoring takes place.
+    \item \textbf{Tertiary agent.} Runs the full governance evaluator catalog in strict mode and returns per evaluator scores, violations, and evidence.
+    \item \textbf{Main agent.} Computes per criterion scores and synthesizes the final score and verdict.
+    \item \textbf{Final comparison agent.} Invoked only when \texttt{model} is a list: weights each participating model by reasoning quality and computes a consensus score that is guaranteed to use weights summing to one hundred.
+\end{itemize}
 
 \newpage
 
-\section{Architectural Decisions and Customizations}
+\section{Architectural Decisions}
 
-While several open source evaluation libraries provide basic LLM as judge capabilities, the requirements of this project extended beyond the functionality offered by default implementations. As a result, multiple architectural decisions were introduced to align the SDK with organizational requirements and the internal model infrastructure.
+Because default open source implementations did not cover the required scope, several project specific decisions shaped the design:
 
-One of the key design decisions involved using LangGraph instead of a plain function call chain. LangGraph enabled predictable execution order, clean state propagation between agents, and a straightforward extension path for adding new agents in the future without rewriting existing code.
-
-Several custom mechanisms were also implemented to improve reliability and developer experience. These included robust JSON parsing for LLM outputs, automatic handling of markdown code fences returned by the model, interactive prompts for missing parameters, defensive validation of inputs, and a fully self contained HTML report that could be opened without any external dependencies.
-
-These customizations enabled the SDK to address organization specific evaluation requirements while maintaining scalability, flexibility, and operational simplicity.
+\begin{itemize}
+    \item \textbf{LangGraph over a plain call chain.} Chosen for predictable execution order, clean state propagation, and a straightforward extension path for new agents.
+    \item \textbf{Robust JSON parsing.} Tolerates markdown code fences and malformed structures returned by the model.
+    \item \textbf{Interactive parameter prompts.} Missing arguments are collected from the console when \texttt{interactive} is enabled.
+    \item \textbf{Defensive input validation.} Every argument is checked before any model call is made.
+    \item \textbf{Self contained HTML report.} Renders offline with no external CSS, JS, or asset dependencies.
+\end{itemize}
 
 \section{Gateway Integration and Authentication}
 
-All large language model invocations within the SDK are routed through the internal Eli Lilly LLM Gateway. The gateway provides a centrally governed access layer, ensures that only approved models are used, and enforces organizational policies on token usage and access control.
-
-To interact with the gateway, the SDK includes a thin client wrapper that handles token acquisition, request signing, and response normalization. Authentication is performed using the Microsoft OAuth2 client credentials flow, where a short lived access token is obtained from the Microsoft identity platform using the application's client identifier, client secret, and tenant identifier. The token is then attached to every gateway request and refreshed automatically when it expires.
-
-Two model identifiers are supported through the gateway integration:
+All LLM invocations are routed through the internal Eli Lilly LLM Gateway, which provides a governed access layer and enforces organizational policies on approved models, token usage, and access control. A thin client wrapper inside the SDK handles:
 
 \begin{itemize}
-    \item gpt5, mapped to a GPT 5 model deployment.
-    \item claude, mapped to a Claude Sonnet model deployment.
+    \item Token acquisition via the Microsoft OAuth2 client credentials flow~\cite{msoauth2}.
+    \item Automatic refresh of short lived access tokens on expiry.
+    \item Attachment of the access token to every gateway request.
+    \item Model identifier resolution to the correct gateway deployment.
 \end{itemize}
 
-This abstraction allows the rest of the SDK to interact with any approved model without having to manage authentication, retry behavior, or vendor specific request formats. It also makes it straightforward to extend the SDK to new models in the future as additional deployments become available through the gateway.
+Two gateway model identifiers are supported today: \texttt{gpt5} (a GPT 5 deployment) and \texttt{claude} (a Claude Sonnet deployment). Adding further approved deployments requires only registering the identifier and does not affect the rest of the SDK.
 
 \section{SDK Invocation and Parameters}
 
-The SDK is designed around a single top level entry point so that consumers can run a full evaluation with only a few lines of code. Figure~\ref{fig:sdk-usage} shows the canonical invocation pattern using a multi model consensus configuration. In this example the caller passes both the agent input and the agent output, hints at the type of output being evaluated, requests a two model evaluation with GPT 5 and Claude, and asks GPT 5 to act as the final synthesizer once both models have produced their scores.
+The SDK exposes a single top level entry point so that consumers can run a full evaluation in a few lines of code. Figure~\ref{fig:sdk-usage} shows a canonical multi model consensus invocation: the caller passes the agent input and output, hints at the output type, requests both GPT 5 and Claude, and asks GPT 5 to synthesize the final consensus.
 
 \begin{figure}[h]
     \centering
@@ -707,7 +712,7 @@ The SDK is designed around a single top level entry point so that consumers can 
     \label{fig:sdk-usage}
 \end{figure}
 
-Every argument accepted by the entry point is described in Table~\ref{tab:sdk-params}. The table lists the parameter name, the values it accepts, and the role it plays inside the evaluation pipeline. Only the input and output arguments are strictly required; all remaining parameters default to sensible values so that first time users can run the pipeline without configuring anything else.
+Table~\ref{tab:sdk-params} lists every accepted parameter, its allowed values, and its role. Only \texttt{input} and \texttt{output} are required; all other parameters default to sensible values so first time users can run the pipeline without further configuration.
 
 \begin{table}[h]
 \centering
@@ -781,25 +786,13 @@ Controls whether the SDK prompts on the console for any missing required paramet
 \end{tabular}
 \end{table}
 
-This single function design keeps the surface area of the SDK small while still exposing enough configuration to support a wide range of evaluation workflows, from simple ad hoc checks to fully governed multi model consensus runs.
+This single function design keeps the SDK surface area small while still supporting workflows that range from quick ad hoc checks to fully governed multi model consensus runs.
 
 \section{Evaluator Implementation}
 
-The governance evaluator catalog was implemented as a fixed set of fifteen evaluators organized into five pillars. Each evaluator is defined by a name, a short description, a pillar assignment, and a scoring rubric that the judge model follows during evaluation.
+The governance evaluator catalog is a fixed set of fifteen evaluators organized into five pillars: Goal Alignment (role adherence, goal drift, objective completion), Compliance (policy violation, guardrail check), Reasoning (hallucination, logical consistency, counterfactual), Tool Safety (prompt injection, data exposure, tool necessity), and Robustness (determinism, output consistency, variance analysis). Each evaluator carries a name, description, pillar assignment, and scoring rubric that the judge model follows during evaluation. The design is declarative so future evaluators can be added with minimal changes to the surrounding pipeline.
 
-The catalog was designed to capture the most important governance dimensions of agentic outputs:
-
-\begin{itemize}
-    \item Goal Alignment, covering role adherence, goal drift, and objective completion.
-    \item Compliance, covering policy violation and guardrail checks.
-    \item Reasoning, covering hallucination, logical consistency, and counterfactual handling.
-    \item Tool Safety, covering prompt injection, data exposure, and tool necessity.
-    \item Robustness, covering determinism, output consistency, and variance analysis.
-\end{itemize}
-
-Special attention was given to ensuring that each evaluator produced a structured response with a score, a passed flag, and reasoning, so that downstream aggregation could be performed in a deterministic way. The evaluator design was kept declarative so that adding or modifying evaluators in the future would require minimal changes to the surrounding pipeline.
-
-Every evaluator returns the same five field response structure, summarized in Table~\ref{tab:evaluator-output}. This uniform contract allows the pipeline to aggregate results, apply thresholds, and render the report without knowing anything specific about the underlying evaluator.
+Every evaluator returns the same five field response structure (Table~\ref{tab:evaluator-output}). This uniform contract lets the pipeline aggregate results, apply thresholds, and render the report without knowing anything evaluator specific.
 
 \begin{table}[h]
 \centering
@@ -824,11 +817,7 @@ severity & string & Categorical risk tag: low, medium, high, critical, or none. 
 
 \section{Pipeline Execution and Scoring}
 
-Once the SDK receives an input and output, the evaluation request is forwarded through the three agent pipeline. The child agent produces a set of criteria specific to the provided input and output. The tertiary agent runs the governance evaluator catalog and produces per evaluator scores along with violations and evidence. The main agent then synthesizes a final score and verdict based on both the criteria scores and the governance findings.
-
-The execution pipeline ensures that evaluation requests remain structured, reproducible, and easy to inspect. Each step writes its output into a shared state object, which is later used both for the final scoring step and for generating the interactive report.
-
-The primary categories of data produced by the pipeline are summarized in Table~\ref{tab:pipeline-output}.
+The three agent pipeline runs sequentially: the child agent produces input specific criteria, the tertiary agent runs the governance evaluator catalog and returns per evaluator scores with violations and evidence, and the main agent synthesizes the final score and verdict from both sources. Each step writes into a shared state object that is used for both final scoring and report generation. Table~\ref{tab:pipeline-output} summarizes the categories of data produced.
 
 \begin{table}[h]
 \centering
@@ -864,41 +853,37 @@ Total input and output tokens used across the pipeline, along with the estimated
 
 \subsection{Scoring Algorithm}
 
-The final score is a weighted composition of the criteria scores produced by the child agent and deductions applied for each failed governance evaluator. The scoring logic was designed to be transparent and reproducible so that reviewers can trace exactly how a final number was derived.
+The final score combines criteria averages with deductions from failing governance evaluators, in a way that is transparent and reproducible for reviewers.
 
-The base score for a single model evaluation is the arithmetic mean of the individual criteria scores.
+The base score is the arithmetic mean of the individual criteria scores, where $c_i$ is the score of the $i$-th criterion and $N$ is the total number of criteria.
 
 \[
 \text{Base Score} = \frac{1}{N} \sum_{i=1}^{N} c_i
 \]
 
-Here $c_i$ represents the score assigned to the $i$-th criterion and $N$ is the total number of criteria produced by the child agent.
-
-Each governance evaluator that scores below the configured pass threshold contributes a deduction. The deduction is proportional to how far the evaluator score falls below the threshold.
+Each evaluator scoring below the pass threshold contributes a deduction proportional to how far it fell below.
 
 \[
 \text{Deduction}_j = \frac{\text{threshold} - s_j}{5} \times 0.5
 \]
 
-Here $s_j$ is the score returned by the $j$-th failing evaluator and the threshold is typically seventy. When every evaluator within a single pillar fails, the deductions for that pillar are doubled to reflect a systemic failure rather than an isolated finding.
+Here $s_j$ is the score of the $j$-th failing evaluator and the threshold defaults to seventy. When every evaluator inside a single pillar fails, the deductions for that pillar are doubled to reflect a systemic rather than isolated failure. The final score is clamped at zero:
 
 \[
 \text{Final Score} = \max\left(0, \; \text{Base Score} - \sum_{j} \text{Deduction}_j\right)
 \]
 
-The score is clamped at zero to prevent negative outputs when many evaluators fail simultaneously. For multi model evaluations the individual model scores are combined using a weighted average, and the weights are configured through the SDK.
+For multi model runs the individual model scores are combined using percentage weights $w_m$ produced by the final comparison agent:
 
 \[
 \text{Final Score}_{\text{multi}} = \sum_{m} \text{Score}_m \times \frac{w_m}{100}
 \]
 
-Here $\text{Score}_m$ is the final score produced by model $m$ and $w_m$ is the weight assigned to that model expressed as a percentage.
-
 \newpage
 
 \section{Governance Pillar Implementation}
 
-The governance pillars were implemented to ensure that agentic outputs are assessed across the dimensions that matter most for enterprise deployments. Different pillars cover different categories of risk and quality.
+The five governance pillars cover the risk and quality dimensions that matter most for enterprise deployments. The catalog structure is shown in Figure~\ref{fig:evaluator_catalog}.
 
 \begin{figure}[h]
   \centering
@@ -963,15 +948,15 @@ The governance pillars were implemented to ensure that agentic outputs are asses
 
 \subsection{Goal Alignment}
 
-The goal alignment pillar verifies that the agent operated within its defined scope and successfully completed the requested task. The system collects the following information:
+The goal alignment pillar verifies that the agent operated within its defined scope and completed the requested task. The evaluators check:
 
 \begin{itemize}
-    \item Whether the agent stayed within its defined role boundaries.
-    \item Whether the agent strayed from the original objective.
-    \item Whether the agent fully completed the requested task without missing components.
+    \item Role adherence to the defined agent boundaries.
+    \item Goal drift away from the original objective.
+    \item Objective completion, including any missing components.
 \end{itemize}
 
-These insights help identify agents that wander off topic, exceed their authority, or leave parts of the task unfinished. A sample rendering of the Goal Alignment pillar section in the generated HTML report is shown in Figure~\ref{fig:pillar_goal_alignment}, where the pillar aggregates the results of the three underlying evaluators and highlights any that did not meet the passing threshold.
+Figure~\ref{fig:pillar_goal_alignment} shows the pillar rendering in the HTML report.
 
 \begin{figure}[htbp]
   \centering
@@ -982,14 +967,14 @@ These insights help identify agents that wander off topic, exceed their authorit
 
 \subsection{Compliance}
 
-The compliance pillar checks that the agent's output respects enterprise policies and safety guardrails. The system tracks:
+The compliance pillar checks that the output respects enterprise policies and safety guardrails. The evaluators surface:
 
 \begin{itemize}
-    \item Possible policy violations such as unauthorized data sharing or prohibited content.
+    \item Policy violations such as unauthorized data sharing or prohibited content.
     \item Attempts to bypass restrictions or ignore safety protocols.
 \end{itemize}
 
-This information helps identify outputs that may carry regulatory, ethical, or operational risk. Figure~\ref{fig:pillar_compliance} shows how the Compliance pillar is rendered in the HTML report, with both underlying evaluators reporting their findings and reasoning.
+Figure~\ref{fig:pillar_compliance} shows the pillar rendering in the report.
 
 \begin{figure}[htbp]
   \centering
@@ -1000,15 +985,15 @@ This information helps identify outputs that may carry regulatory, ethical, or o
 
 \subsection{Reasoning}
 
-The reasoning pillar evaluates the soundness of the agent's logic. The following dimensions are continuously checked:
+The reasoning pillar evaluates the soundness of the agent's logic. The evaluators cover:
 
 \begin{itemize}
     \item Hallucinations, including fabricated statistics, citations, or entities.
     \item Logical consistency, including contradictions and non sequiturs.
-    \item Counterfactual handling, including the agent's treatment of hypothetical scenarios.
+    \item Counterfactual handling for hypothetical or conditional scenarios.
 \end{itemize}
 
-These checks provide insight into whether the agent's conclusions are trustworthy and well supported. Figure~\ref{fig:pillar_reasoning} shows the Reasoning pillar as rendered in the HTML report, including the hallucination, logical consistency, and counterfactual evaluators with their supporting findings.
+Figure~\ref{fig:pillar_reasoning} shows the pillar as rendered in the HTML report.
 
 \begin{figure}[htbp]
   \centering
@@ -1019,15 +1004,15 @@ These checks provide insight into whether the agent's conclusions are trustworth
 
 \subsection{Tool Safety}
 
-Tool safety analysis is conducted to understand how the agent interacts with external tools and how it handles untrusted inputs. The collected insights include:
+The tool safety pillar inspects how the agent interacts with external tools and handles untrusted input. The evaluators detect:
 
 \begin{itemize}
-    \item Prompt injection attempts contained in the input.
-    \item Potential data exposure in the output.
-    \item Appropriateness of tool usage and reliance.
+    \item Prompt injection attempts embedded in the input.
+    \item Potential data exposure surfaced in the output.
+    \item Appropriateness and necessity of tool usage.
 \end{itemize}
 
-These analytics support decisions about whether the agent can be safely connected to additional tools or sensitive data sources. Figure~\ref{fig:pillar_tool_safety} shows the Tool Safety pillar rendered in the HTML report, covering prompt injection, data exposure, and tool necessity checks.
+Figure~\ref{fig:pillar_tool_safety} shows the pillar rendered in the report.
 
 \begin{figure}[htbp]
   \centering
@@ -1038,15 +1023,15 @@ These analytics support decisions about whether the agent can be safely connecte
 
 \subsection{Robustness}
 
-The robustness pillar examines whether the agent produces stable, consistent, and predictable outputs across similar inputs. The following dimensions are checked:
+The robustness pillar checks whether the agent produces stable, consistent, and predictable outputs across similar inputs. The evaluators cover:
 
 \begin{itemize}
-    \item Determinism, including erratic or random variations in behavior.
+    \item Determinism, including erratic or random variation in behavior.
     \item Output consistency, including stability of format, tone, and structure.
-    \item Variance analysis, including subtle inconsistencies that may indicate unreliable behavior.
+    \item Variance analysis, including subtle inconsistencies across runs.
 \end{itemize}
 
-These checks help identify agents that may behave unpredictably in production and provide an early warning when outputs drift between runs. Figure~\ref{fig:pillar_robustness} shows the Robustness pillar rendered in the HTML report, aggregating the determinism, output consistency, and variance analysis evaluators.
+Figure~\ref{fig:pillar_robustness} shows the pillar rendered in the report.
 
 \begin{figure}[htbp]
   \centering
@@ -1057,22 +1042,18 @@ These checks help identify agents that may behave unpredictably in production an
 
 \section{HTML Report Generation}
 
-To enable effective inspection of evaluation results, a self contained HTML report is generated for every run. The report is rendered as a single HTML file that can be opened directly in a browser without any additional dependencies.
-
-The reports were designed to present the following insights:
+Every evaluation run produces a single self contained HTML file that can be opened directly in any browser without additional dependencies. The report presents:
 
 \begin{itemize}
     \item Overall score and pass or fail verdict.
-    \item Risk level summary based on governance findings.
+    \item Risk level summary derived from governance findings.
     \item Per criterion score breakdown with reasoning.
     \item Per evaluator results across all five pillars.
-    \item Violations and evidence supporting any failed checks.
-    \item Token usage and estimated cost for the evaluation.
+    \item Violations and evidence for every failed check.
+    \item Token usage and estimated cost for the run.
 \end{itemize}
 
-The report layout was structured to support both quick high level inspection and detailed root cause analysis. High level sections provide a consolidated view of the verdict and risk, while detailed sections allow engineers to investigate specific evaluators, review their evidence, and understand exactly why a particular check passed or failed.
-
-The overall structure of the generated report is shown in Figure~\ref{fig:html_report_scoring}, which combines the high level verdict panel with the beginning of the criteria scoring section, followed by a continuation of the per criterion evidence.
+The layout supports both quick high level inspection and deep root cause analysis. Figure~\ref{fig:html_report_scoring} shows the verdict panel combined with the beginning of the criteria scoring section, followed by per criterion evidence.
 
 \begin{figure}[htbp]
   \centering
@@ -1087,7 +1068,7 @@ The overall structure of the generated report is shown in Figure~\ref{fig:html_r
   \caption[]{(continued) Criteria Scoring with Per Criterion Evidence}
 \end{figure}
 
-The report also consolidates every failed governance check into a dedicated violations panel and lists the strengths surfaced across evaluators in a corresponding evidence panel. This gives reviewers a single view of what went wrong, at what severity, and what the models observed as strong points in the output. Figure~\ref{fig:violations_evidence} shows this section as rendered in the HTML report.
+Failed governance checks are consolidated into a dedicated violations panel alongside a corresponding evidence panel listing strengths surfaced across evaluators. Reviewers see, in one place, what went wrong, at what severity, and what the models identified as strong points (Figure~\ref{fig:violations_evidence}).
 
 \begin{figure}[htbp]
   \centering
@@ -1096,7 +1077,7 @@ The report also consolidates every failed governance check into a dedicated viol
   \label{fig:violations_evidence}
 \end{figure}
 
-For traceability, the HTML report also embeds the raw input received by the agent and the raw output produced. Reviewers can therefore inspect the exact content that drove the evaluation without leaving the report, which is particularly useful when explaining why a particular check passed or failed. Figure~\ref{fig:input_output_panel} shows the Input and Output panel as rendered in the report.
+For full traceability, the report also embeds the raw agent input and output, so reviewers can inspect the exact content that drove the evaluation without leaving the page (Figure~\ref{fig:input_output_panel}).
 
 \begin{figure}[htbp]
   \centering
@@ -1107,39 +1088,34 @@ For traceability, the HTML report also embeds the raw input received by the agen
 
 \section{Multi Model Consensus}
 
-Multi model consensus evaluation was implemented to reduce single model bias and increase confidence in the final verdict. When the SDK is invoked with a list of models, the full three agent pipeline is executed independently for each model.
-
-A separate final comparison agent then compares the per model results and produces a consensus verdict:
+Multi model consensus reduces single model bias and increases confidence in the final verdict. When \texttt{evaluate()} is called with a list of models, the SDK:
 
 \begin{itemize}
-    \item Independent execution of the full pipeline for each model.
-    \item Comparison of criteria scores and governance findings across models.
-    \item Identification of points of agreement and disagreement.
-    \item Weighted averaging based on reasoning quality.
-    \item Generation of a final consensus verdict and confidence label.
+    \item Runs the full three agent pipeline independently for each configured model.
+    \item Compares criteria scores and governance findings across models.
+    \item Identifies points of agreement and disagreement between models.
+    \item Assigns percentage weights to each model based on reasoning quality.
+    \item Produces the final consensus verdict alongside a confidence label.
 \end{itemize}
 
-The integration of consensus evaluation with the rest of the SDK ensures that users gain access to advanced multi model judging without having to manage orchestration logic themselves.
-
-Rather than being surfaced as an isolated dashboard section, the multi model nature of an evaluation is reflected throughout the generated report. The cost summary panel visible in Figure~\ref{fig:html_report_scoring} breaks down token usage and cost by GPT-5, Claude, and the final consensus agent, giving reviewers a direct view of the multi model workload. Similarly, the violations and evidence panels in Figure~\ref{fig:violations_evidence} attribute each finding to the specific judge model that produced it, so any disagreement or unique observation between GPT-5 and Claude is preserved and visible in the same report.
+The multi model nature is reflected throughout the report: the cost panel in Figure~\ref{fig:html_report_scoring} breaks down tokens and cost by GPT-5, Claude, and the consensus agent, and the panels in Figure~\ref{fig:violations_evidence} attribute each finding to its originating judge, so any disagreement between GPT-5 and Claude is preserved rather than hidden.
 
 \section{Cost and Token Tracking}
 
-Token usage and cost tracking are integrated into every evaluation. A dedicated cost tracker is created at the start of each evaluation run and is invoked at each stage of the pipeline. For every step, the tracker estimates the number of input and output tokens consumed and computes the corresponding cost based on per model pricing configured through environment variables.
+A cost tracker is instantiated at the start of each run and invoked at every stage of the pipeline. For each stage, the tracker records:
 
-The cost tracker maintains a per stage breakdown alongside an overall total. At the end of the evaluation, the tracker is serialized into the final result object and surfaced in the generated HTML report. This provides users with full visibility into the operational expense of every evaluation, supports cost analysis when running large evaluation batches, and helps teams reason about whether multi model consensus is justified for a given use case.
+\begin{itemize}
+    \item Input tokens consumed by the model call.
+    \item Output tokens produced by the model.
+    \item Cost derived from per model pricing configured via environment variables.
+    \item A per stage breakdown alongside an overall run total.
+\end{itemize}
 
-By embedding cost tracking directly into the SDK rather than relying on external billing dashboards, engineers receive immediate feedback on token consumption as soon as an evaluation completes. This was particularly valuable during development, where comparing the cost profile of different evaluator configurations informed both prompt design and default pipeline behavior.
+The tracker is serialized into the final result object and surfaced in the HTML report, so engineers receive immediate feedback on token consumption as soon as an evaluation completes. This proved particularly useful when comparing the cost profile of different evaluator configurations during development.
 
 \subsection{Performance Characteristics}
 
-The typical resource footprint of a single evaluation was profiled during validation to give teams a realistic sense of the runtime cost of adopting the SDK. The measurements below reflect standard configurations against the two supported model families through the internal LLM Gateway.
-
-For a single model evaluation, the pipeline issues three sequential model calls, one for each agent in the Child, Tertiary, and Main sequence. End to end latency is dominated by the model response time and typically falls in the range of thirty to sixty seconds. Total token consumption for a standard evaluation is approximately sixty to seventy thousand tokens across all three stages, with the tertiary agent contributing the majority due to its execution of the full governance evaluator catalog.
-
-Multi model evaluations run the entire pipeline once per configured model and then execute an additional final comparison agent to synthesize the consensus verdict. For a two model configuration this results in seven total model calls and an end to end latency of roughly sixty to one hundred twenty seconds. Token consumption scales proportionally with the number of models plus the overhead of the comparison agent.
-
-Table~\ref{tab:performance} summarizes the observed characteristics of the two evaluation modes.
+The runtime footprint was profiled during validation to give teams a realistic sense of the cost of adopting the SDK. A single model evaluation issues three sequential model calls (child, tertiary, main) and completes in roughly thirty to sixty seconds, consuming approximately sixty to seventy thousand tokens; the tertiary agent dominates because it runs the full evaluator catalog. A two model configuration issues seven total calls (three per model plus the final comparison agent) and completes in roughly sixty to one hundred twenty seconds, with tokens scaling proportionally. Table~\ref{tab:performance} summarizes both modes.
 
 \begin{table}[h]
 \centering
@@ -1160,13 +1136,11 @@ Consensus Synthesis Stage & Not applicable & Final Comparison Agent \\
 \end{tabular}
 \end{table}
 
-These numbers were captured under standard governance evaluation configurations and vary depending on input length, output length, evaluator selection, and gateway load at the time of execution.
+These numbers depend on input length, output length, evaluator selection, and gateway load at the time of execution.
 
 \section{Deployment and Validation}
 
-Following the implementation of the SDK, the completed framework was packaged as a Python wheel and integrated with the target evaluation workflows. Comprehensive validation activities were conducted to ensure the reliability, accuracy, and effectiveness of the overall solution.
-
-The validation process focused on verifying the following aspects:
+The completed SDK was packaged as a Python wheel and integrated with the target evaluation workflows. Validation focused on verifying:
 
 \begin{itemize}
     \item Correctness of criteria generation across diverse inputs.
@@ -1176,50 +1150,38 @@ The validation process focused on verifying the following aspects:
     \item Stability of cost tracking and report generation.
 \end{itemize}
 
-Testing was performed across multiple scenarios involving diverse agent inputs and outputs of varying complexity, length, and domain. The validation set was designed to cover both well behaved outputs and intentionally degraded outputs in order to confirm that the scoring pipeline reacted appropriately and that violations were surfaced with accurate evidence. Additional validation ensured that the generated HTML report rendered correctly across different browsers and operating systems.
-
-Successful validation confirmed that the SDK was capable of providing reliable, structured, and reproducible evaluations of agentic outputs while maintaining a clean developer experience.
+Test inputs ranged across domains and complexities and deliberately included degraded outputs to confirm that the pipeline surfaced violations with accurate evidence. Report rendering was verified across major browsers and operating systems. The results confirmed that the SDK delivered reliable, structured, and reproducible evaluations while retaining a clean developer experience.
 
 % ============================================================
 %  6.  OBSERVATIONS AND FINDINGS
 % ============================================================
 \chapter{Observations and Findings}
 
-The implemented Agent Eval SDK successfully provided structured, governance aware evaluation of agentic outputs. The generated results enabled centralized review of agent behavior across different use cases and provided a consistent basis for quality assessment within the team.
-
-The interactive HTML reports provided actionable insights into criteria scores, governance findings, violations, evidence, and cost information. These visualizations simplified the review process and improved the ability to identify issues affecting agent reliability, safety, and accuracy.
+The SDK delivered structured, governance aware evaluation of agentic outputs and gave the team a consistent basis for quality assessment across use cases. The interactive HTML report provided actionable insight into criteria scores, governance findings, violations, evidence, and cost information, and simplified triage of issues affecting reliability, safety, and accuracy.
 
 \section{Key Observations}
 
-The implementation and validation phases resulted in several important observations regarding the effectiveness of the SDK:
-
 \begin{itemize}
-    \item Agentic outputs could be scored consistently without relying on manual review by engineers.
-    \item Governance focused evaluators enabled early detection of risky or non compliant behavior.
-    \item Multi model consensus reduced the impact of single model bias on the final verdict.
-    \item Interactive HTML reports significantly improved the speed of result review and triage.
-    \item Cost tracking provided a clear picture of the operational expense of running large scale evaluations.
-    \item The single function entry point made the SDK easy to integrate into existing pipelines.
+    \item Agentic outputs could be scored consistently without relying on manual engineer review.
+    \item Governance evaluators enabled early detection of risky or non compliant behavior.
+    \item Multi model consensus reduced the impact of single model bias.
+    \item Interactive HTML reports significantly accelerated result review and triage.
+    \item Built in cost tracking clarified the operational expense of large scale evaluations.
+    \item The single function entry point simplified integration into existing pipelines.
 \end{itemize}
 
 \section{Key Findings}
 
-Based on the implementation, testing, and operational observations, the following key findings were identified:
-
 \begin{itemize}
-    \item A dedicated evaluation SDK significantly improves the consistency and explainability of agent assessment.
+    \item A dedicated evaluation SDK improves the consistency and explainability of agent assessment.
     \item Combining criteria generation, governance evaluation, and final synthesis creates a unified review experience.
-    \item Structured evaluation output reduces ambiguity during quality discussions and accelerates iteration.
+    \item Structured output reduces ambiguity during quality discussions and accelerates iteration.
     \item The implemented architecture provides a scalable foundation for future evaluators and judging strategies.
 \end{itemize}
 
 \section{Operational and Cost Benefits}
 
-A significant outcome of the project was the ability to deliver enterprise grade agentic evaluation while leveraging existing organizational infrastructure.
-
-By integrating with the internal LLM Gateway and reusing internally approved models, the solution avoided the need to onboard additional commercial evaluation platforms. This eliminated recurring licensing costs, reduced procurement overhead, and avoided the operational effort associated with managing separate vendor relationships.
-
-The resulting SDK provides a cost effective and scalable evaluation solution while retaining full control over evaluator design, scoring logic, and future expansion opportunities.
+By reusing the internal LLM Gateway and internally approved models, the SDK avoided onboarding an additional commercial evaluation platform, eliminating recurring licensing costs, procurement overhead, and separate vendor relationships, while retaining full control over evaluator design, scoring logic, and future expansion.
 
 \newpage
 % ============================================================
@@ -1227,46 +1189,32 @@ The resulting SDK provides a cost effective and scalable evaluation solution whi
 % ============================================================
 \chapter{Limitations}
 
-While the implemented Agent Eval SDK provides comprehensive evaluation of agentic outputs, certain limitations remain within the scope of the current implementation.
+While the implemented SDK provides comprehensive evaluation of agentic outputs, certain limitations remain within the scope of the current implementation:
 
-The solution has been designed and validated primarily for text based agent outputs. Extending the same evaluation framework to multi modal outputs such as images, audio, or video would require additional research, format specific evaluators, and integration with model specific judging capabilities.
+\begin{itemize}
+    \item The SDK covers text based agent outputs; multi modal outputs (images, audio, video) would require format specific evaluators and integration with model specific judging.
+    \item Longitudinal capabilities such as persistent evaluation history, cross run comparison, and trend dashboards were intentionally kept out of scope.
+    \item Evaluation quality is bounded by the capabilities and biases of the underlying judge models, particularly in highly specialized domains.
+    \item The depth of governance analysis depends on the quality of evaluator prompts and rubrics; uncovered scenarios or under specified rubrics may reduce coverage.
+\end{itemize}
 
-Although the SDK captures rich governance findings, score breakdowns, and cost information, it does not currently provide longitudinal tracking of evaluations across runs or detailed per agent regression analysis. Advanced capabilities such as persistent evaluation history, cross run comparison, and trend dashboards were intentionally kept outside the scope of this project.
-
-The evaluation quality available through the SDK is bounded by the capabilities and biases of the underlying judge models. Any limitations or blind spots present in the judge models may carry over into the evaluation results, particularly in highly specialized domains.
-
-Furthermore, the effectiveness of governance evaluators depends on the quality of the prompts and rubrics used to drive them. Any uncovered scenarios or under specified rubrics may reduce the depth of analysis for certain types of outputs.
-
-Despite these limitations, the implemented solution successfully achieves the primary objective of providing structured, governance aware, and reproducible evaluation of agentic outputs. The SDK establishes a strong foundation for future enhancements and expansion of evaluation capabilities.
+Despite these limitations, the SDK achieves its primary objective of providing structured, governance aware, and reproducible evaluation, and establishes a solid foundation for future enhancements.
 
 \chapter{Conclusion and Future Work}
 
 \section{Conclusion}
 
-The project successfully achieved its objective of designing and implementing a reusable SDK for evaluating agentic AI outputs at Eli Lilly. Through a structured approach involving requirement analysis, proof of concept development, architecture design, and production implementation, a scalable and vendor independent evaluation solution was established.
-
-The implemented SDK provides structured visibility into criteria scores, governance findings, violations, evidence, and cost information. By integrating criteria generation, governance evaluation, final synthesis, and reporting into a unified framework, the solution enables faster review, more consistent quality assessment, and stronger confidence before deploying agentic features to production.
-
-Beyond the technical implementation, the project provided valuable experience in applied AI engineering, system design, prompt engineering for judge agents, and cross functional collaboration. The successful packaging of the SDK as a reusable Python wheel establishes a strong foundation for future evaluation initiatives and contributes to improving the reliability, governance, and maintainability of agentic AI workflows within the organization. The project also demonstrated that enterprise grade evaluation can be achieved through a carefully designed, vendor independent architecture that leverages existing organizational infrastructure, thereby reducing both operational complexity and long term cost.
+The project delivered a reusable SDK for evaluating agentic AI outputs at Eli Lilly. Structured requirement analysis, a targeted PoC, and a clean three agent architecture yielded a scalable, vendor independent solution that provides structured visibility into criteria scores, governance findings, violations, evidence, and cost, and that packages cleanly as a Python wheel for other engineering teams. Beyond the technical outcome, the internship provided direct experience in applied AI engineering, system design, prompt engineering for judge agents, and cross functional collaboration, and demonstrated that enterprise grade evaluation can be achieved by leveraging existing organizational infrastructure rather than onboarding external platforms.
 
 \section{Future Work}
 
-Although the current implementation fulfills the primary project objectives, several enhancements can be explored in the future:
-
 \begin{itemize}
-\item Extension of the evaluation framework to multi modal agent outputs through format specific evaluators and judging strategies.
-
-\item Implementation of persistent evaluation history, cross run comparison, and regression analysis to support longitudinal quality tracking.
-
-\item Integration with continuous integration pipelines to enable automatic evaluation gates for agentic features.
-
-\item Development of adaptive evaluator selection based on the structure and content of the agent output.
-
-\item Expansion of domain specific evaluators to support specialized use cases such as clinical, regulatory, and scientific workflows.
-
+\item Extension to multi modal agent outputs through format specific evaluators.
+\item Persistent evaluation history, cross run comparison, and regression analysis for longitudinal tracking.
+\item Integration with CI pipelines to enable automatic evaluation gates for agentic features.
+\item Adaptive evaluator selection driven by output structure and content.
+\item Expansion of domain specific evaluators for clinical, regulatory, and scientific workflows.
 \end{itemize}
-
-These enhancements can further strengthen the evaluation ecosystem and provide deeper insights into agent performance, reliability, and safety. The current implementation serves as a scalable foundation upon which future evaluation and governance capabilities can be continuously expanded and refined.
 
 % ============================================================
 %  BIBLIOGRAPHY / REFERENCES

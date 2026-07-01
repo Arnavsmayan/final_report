@@ -253,15 +253,13 @@ In Partial Fulfillment of the Requirements for the Degree of Bachelor of Enginee
 \vspace{0.05in}
 
 {\fontsize{12}{14}\selectfont
-Agentic artificial intelligence systems are increasingly being deployed across enterprise workflows for tasks such as document summarization, information extraction, code generation, and decision support. Evaluating whether these systems consistently produce reliable, safe, and goal aligned outputs remains a significant challenge because their behavior is probabilistic, multi step, and highly context dependent.
+Agentic artificial intelligence systems are increasingly deployed across enterprise workflows for tasks such as document summarization, information extraction, code generation, and decision support. Evaluating whether these systems consistently produce reliable, safe, and goal aligned outputs remains challenging because their behavior is probabilistic, multi step, and highly context dependent.
 
 This project focused on the design and implementation of Agent Eval, a reusable Software Development Kit for evaluating the outputs of agentic workflows using a Large Language Model based judging approach. The SDK provides a single function entry point that accepts the input and output of any agent and returns a structured evaluation result including a numerical score, a pass or fail verdict, governance findings, and detailed reasoning.
 
-Agent Eval is built on a three agent LangGraph state machine. The first agent generates evaluation criteria from the provided input and output, the second agent runs a strict governance check across fifteen evaluators organized into five pillars, and the third agent synthesizes the final score and verdict. The SDK also supports multi model consensus evaluation, where the same workflow is executed independently across multiple judge models and a final synthesis agent produces a consolidated result.
+Agent Eval is built on a three agent LangGraph state machine. A child agent generates evaluation criteria, a tertiary agent runs a strict governance check across fifteen evaluators organized into five pillars, and a main agent synthesizes the final score and verdict. The SDK also supports multi model consensus, where the pipeline is executed independently across multiple judge models and a final synthesis agent produces a consolidated result.
 
-The implemented framework integrates with the internal Eli Lilly LLM Gateway through Microsoft OAuth2 authentication and supports both GPT 5 and Claude Sonnet models. Token usage and cost tracking are built into every evaluation, and a self contained HTML report is automatically generated for each run. The SDK has been validated across a wide variety of evaluation scenarios involving diverse agent inputs and outputs of differing complexity, length, and domain.
-
-The resulting solution provides a vendor independent, extensible, and production ready foundation for governance focused evaluation of agentic AI workflows, enabling teams to gain confidence in agent behavior before production deployment.
+The framework integrates with the internal Eli Lilly LLM Gateway through Microsoft OAuth2 and supports both GPT 5 and Claude Sonnet. Token usage and cost tracking are built in, and a self contained HTML report is generated for every run. The resulting solution provides a vendor independent, extensible, and production ready foundation for governance focused evaluation of agentic AI workflows.
 }
 
 \vspace{0.3in}

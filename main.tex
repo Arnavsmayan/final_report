@@ -78,6 +78,7 @@
 % ── Figures and tables ───────────────────────────────────────
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{subcaption}
 \captionsetup[figure]{name=Figure, labelfont=bf, labelsep=colon,
                       justification=centering, font={stretch=1.5}}
 \captionsetup[table] {name=Table,  labelfont=bf, labelsep=colon,
@@ -905,7 +906,14 @@ The goal alignment pillar verifies that the agent operated within its defined sc
     \item Whether the agent fully completed the requested task without missing components.
 \end{itemize}
 
-These insights help identify agents that wander off topic, exceed their authority, or leave parts of the task unfinished.
+These insights help identify agents that wander off topic, exceed their authority, or leave parts of the task unfinished. A sample rendering of the Goal Alignment pillar section in the generated HTML report is shown in Figure~\ref{fig:pillar_goal_alignment}, where the pillar aggregates the results of the three underlying evaluators and highlights any that did not meet the passing threshold.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{pillar_goal_alignment.png}
+  \caption{Goal Alignment Pillar Rendering in the HTML Report}
+  \label{fig:pillar_goal_alignment}
+\end{figure}
 
 \subsection{Compliance}
 
@@ -916,7 +924,14 @@ The compliance pillar checks that the agent's output respects enterprise policie
     \item Attempts to bypass restrictions or ignore safety protocols.
 \end{itemize}
 
-This information helps identify outputs that may carry regulatory, ethical, or operational risk.
+This information helps identify outputs that may carry regulatory, ethical, or operational risk. Figure~\ref{fig:pillar_compliance} shows how the Compliance pillar is rendered in the HTML report, with both underlying evaluators reporting their findings and reasoning.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{pillar_compliance.png}
+  \caption{Compliance Pillar Rendering in the HTML Report}
+  \label{fig:pillar_compliance}
+\end{figure}
 
 \subsection{Reasoning}
 
@@ -928,7 +943,14 @@ The reasoning pillar evaluates the soundness of the agent's logic. The following
     \item Counterfactual handling, including the agent's treatment of hypothetical scenarios.
 \end{itemize}
 
-These checks provide insight into whether the agent's conclusions are trustworthy and well supported.
+These checks provide insight into whether the agent's conclusions are trustworthy and well supported. Figure~\ref{fig:pillar_reasoning} shows the Reasoning pillar as rendered in the HTML report, including the hallucination, logical consistency, and counterfactual evaluators with their supporting findings.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{pillar_reasoning.png}
+  \caption{Reasoning Pillar Rendering in the HTML Report}
+  \label{fig:pillar_reasoning}
+\end{figure}
 
 \subsection{Tool Safety}
 
@@ -940,7 +962,14 @@ Tool safety analysis is conducted to understand how the agent interacts with ext
     \item Appropriateness of tool usage and reliance.
 \end{itemize}
 
-These analytics support decisions about whether the agent can be safely connected to additional tools or sensitive data sources.
+These analytics support decisions about whether the agent can be safely connected to additional tools or sensitive data sources. Figure~\ref{fig:pillar_tool_safety} shows the Tool Safety pillar rendered in the HTML report, covering prompt injection, data exposure, and tool necessity checks.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{pillar_tool_safety.png}
+  \caption{Tool Safety Pillar Rendering in the HTML Report}
+  \label{fig:pillar_tool_safety}
+\end{figure}
 
 \subsection{Robustness}
 
@@ -952,7 +981,14 @@ The robustness pillar examines whether the agent produces stable, consistent, an
     \item Variance analysis, including subtle inconsistencies that may indicate unreliable behavior.
 \end{itemize}
 
-These checks help identify agents that may behave unpredictably in production and provide an early warning when outputs drift between runs.
+These checks help identify agents that may behave unpredictably in production and provide an early warning when outputs drift between runs. Figure~\ref{fig:pillar_robustness} shows the Robustness pillar rendered in the HTML report, aggregating the determinism, output consistency, and variance analysis evaluators.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{pillar_robustness.png}
+  \caption{Robustness Pillar Rendering in the HTML Report}
+  \label{fig:pillar_robustness}
+\end{figure}
 
 \section{HTML Report Generation}
 
@@ -970,6 +1006,39 @@ The reports were designed to present the following insights:
 \end{itemize}
 
 The report layout was structured to support both quick high level inspection and detailed root cause analysis. High level sections provide a consolidated view of the verdict and risk, while detailed sections allow engineers to investigate specific evaluators, review their evidence, and understand exactly why a particular check passed or failed.
+
+The overall structure of the generated report is shown in Figure~\ref{fig:html_report_scoring}, which combines the high level verdict panel with the beginning of the criteria scoring section, followed by a continuation of the per criterion evidence.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{html_report_overview.png}
+  \caption{Agent Eval HTML Report: Verdict Summary, Cost Breakdown, and Criteria Scoring}
+  \label{fig:html_report_scoring}
+\end{figure}
+
+\begin{figure}[htbp]\ContinuedFloat
+  \centering
+  \includegraphics[width=1.0\textwidth]{html_report_criteria.png}
+  \caption[]{(continued) Criteria Scoring with Per Criterion Evidence}
+\end{figure}
+
+The report also consolidates every failed governance check into a dedicated violations panel and lists the strengths surfaced across evaluators in a corresponding evidence panel. This gives reviewers a single view of what went wrong, at what severity, and what the models observed as strong points in the output. Figure~\ref{fig:violations_evidence} shows this section as rendered in the HTML report.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{violations_evidence.png}
+  \caption{Consolidated Violations and Evidence Panels in the HTML Report}
+  \label{fig:violations_evidence}
+\end{figure}
+
+For traceability, the HTML report also embeds the raw input received by the agent and the raw output produced. Reviewers can therefore inspect the exact content that drove the evaluation without leaving the report, which is particularly useful when explaining why a particular check passed or failed. Figure~\ref{fig:input_output_panel} shows the Input and Output panel as rendered in the report.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{input_output_panel.png}
+  \caption{Input and Output Panel in the HTML Report}
+  \label{fig:input_output_panel}
+\end{figure}
 
 \section{Multi Model Consensus}
 
@@ -1053,27 +1122,6 @@ A significant outcome of the project was the ability to deliver enterprise grade
 By integrating with the internal LLM Gateway and reusing internally approved models, the solution avoided the need to onboard additional commercial evaluation platforms. This eliminated recurring licensing costs, reduced procurement overhead, and avoided the operational effort associated with managing separate vendor relationships.
 
 The resulting SDK provides a cost effective and scalable evaluation solution while retaining full control over evaluator design, scoring logic, and future expansion opportunities.
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1.0\textwidth]{html_report.png}
-  \caption{Agent Eval HTML Evaluation Report}
-  \label{fig:html_report}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1.0\textwidth]{pillar_breakdown.png}
-  \caption{Governance Pillar Breakdown}
-  \label{fig:pillar_breakdown}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1.0\textwidth]{multi_model_consensus.png}
-  \caption{Multi Model Consensus Result}
-  \label{fig:multi_model_consensus}
-\end{figure}
 
 \newpage
 % ============================================================

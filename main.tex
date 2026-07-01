@@ -361,7 +361,7 @@ Eli Lilly delivers a wide portfolio of medicines that address chronic conditions
 
 \section{Technology and Innovation}
 
-Technology plays a central role at Eli Lilly. The organization invests in cloud infrastructure, modern data platforms, machine learning systems, and large language model based applications. The internal LLM Gateway provides a governed and centrally managed access layer through which authorized teams can build applications that consume models such as GPT 5 and Claude Sonnet. Continuous innovation is supported through dedicated platforms, internal research teams, and applied artificial intelligence initiatives across the enterprise.
+Technology plays a central role at Eli Lilly. The organization invests in cloud infrastructure, modern data platforms, machine learning systems, and large language model based applications. The internal LLM Gateway~\cite{lillygw} provides a governed and centrally managed access layer through which authorized teams can build applications that consume models such as GPT 5~\cite{openai} and Claude Sonnet~\cite{claude}. Continuous innovation is supported through dedicated platforms, internal research teams, and applied artificial intelligence initiatives across the enterprise.
 
 \section{Internship Experience and Learning Environment}
 
@@ -544,7 +544,7 @@ To define and implement a fixed catalog of fifteen governance evaluators organiz
 To enable evaluation using multiple judge models in parallel and synthesize a consensus verdict in order to reduce single model bias and increase confidence in the final score.
 
 \item \textbf{Integration with Internal Gateway and Interactive Reporting.}
-To integrate the SDK with the internal Eli Lilly LLM Gateway using Microsoft OAuth2 authentication and to generate a self contained interactive HTML report for each evaluation, including scores, verdicts, evidence, and cost information.
+To integrate the SDK with the internal Eli Lilly LLM Gateway using Microsoft OAuth2 authentication~\cite{msoauth2} and to generate a self contained interactive HTML report for each evaluation, including scores, verdicts, evidence, and cost information.
 
 \end{enumerate}
 
@@ -559,7 +559,7 @@ This chapter describes the approach followed to achieve the objectives of the pr
 
 The project commenced with discussions involving applied AI engineers, platform teams, and stakeholders to identify gaps in existing evaluation tooling and operational challenges encountered while assessing agentic outputs. Multiple categories of agentic workflows were considered, including document summarization, structured information extraction, code generation, and chatbot question answering.
 
-Based on the identified requirements, a roadmap was prepared to design an evaluation SDK capable of providing structured, governance aware scoring while integrating seamlessly with the internal LLM Gateway and existing engineering workflows.
+Based on the identified requirements, a roadmap was prepared to design an evaluation SDK capable of providing structured, governance aware scoring while integrating seamlessly with the internal LLM Gateway and existing engineering workflows. The planned deliverable was a distributable Python package~\cite{pypa} with strict runtime schema validation of both configuration inputs and LLM outputs using Pydantic~\cite{pydantic}, so that the SDK could be consumed reliably by other engineering teams inside the organization.
 
 \section{Proof of Concept Development}
 
@@ -675,23 +675,23 @@ The final comparison agent is invoked only when the model parameter is a list. I
 
 While several open source evaluation libraries provide basic LLM as judge capabilities, the requirements of this project extended beyond the functionality offered by default implementations. As a result, multiple architectural decisions were introduced to align the SDK with organizational requirements and the internal model infrastructure.
 
-One of the key design decisions involved using LangGraph~\cite{langgraph} instead of a plain function call chain. LangGraph enabled predictable execution order, clean state propagation between agents, and a straightforward extension path for adding new agents in the future without rewriting existing code.
+One of the key design decisions involved using LangGraph instead of a plain function call chain. LangGraph enabled predictable execution order, clean state propagation between agents, and a straightforward extension path for adding new agents in the future without rewriting existing code.
 
-Several custom mechanisms were also implemented to improve reliability and developer experience. These included robust JSON parsing for LLM outputs, automatic handling of markdown code fences returned by the model, interactive prompts for missing parameters, defensive validation of inputs using Pydantic~\cite{pydantic}, and a fully self contained HTML report that could be opened without any external dependencies.
+Several custom mechanisms were also implemented to improve reliability and developer experience. These included robust JSON parsing for LLM outputs, automatic handling of markdown code fences returned by the model, interactive prompts for missing parameters, defensive validation of inputs, and a fully self contained HTML report that could be opened without any external dependencies.
 
 These customizations enabled the SDK to address organization specific evaluation requirements while maintaining scalability, flexibility, and operational simplicity.
 
 \section{Gateway Integration and Authentication}
 
-All large language model invocations within the SDK are routed through the internal Eli Lilly LLM Gateway~\cite{lillygw}. The gateway provides a centrally governed access layer, ensures that only approved models are used, and enforces organizational policies on token usage and access control.
+All large language model invocations within the SDK are routed through the internal Eli Lilly LLM Gateway. The gateway provides a centrally governed access layer, ensures that only approved models are used, and enforces organizational policies on token usage and access control.
 
-To interact with the gateway, the SDK includes a thin client wrapper that handles token acquisition, request signing, and response normalization. Authentication is performed using the Microsoft OAuth2 client credentials flow~\cite{msoauth2}, where a short lived access token is obtained from the Microsoft identity platform using the application's client identifier, client secret, and tenant identifier. The token is then attached to every gateway request and refreshed automatically when it expires.
+To interact with the gateway, the SDK includes a thin client wrapper that handles token acquisition, request signing, and response normalization. Authentication is performed using the Microsoft OAuth2 client credentials flow, where a short lived access token is obtained from the Microsoft identity platform using the application's client identifier, client secret, and tenant identifier. The token is then attached to every gateway request and refreshed automatically when it expires.
 
 Two model identifiers are supported through the gateway integration:
 
 \begin{itemize}
-    \item gpt5, mapped to a GPT 5 model deployment~\cite{openai}.
-    \item claude, mapped to a Claude Sonnet model deployment~\cite{claude}.
+    \item gpt5, mapped to a GPT 5 model deployment.
+    \item claude, mapped to a Claude Sonnet model deployment.
 \end{itemize}
 
 This abstraction allows the rest of the SDK to interact with any approved model without having to manage authentication, retry behavior, or vendor specific request formats. It also makes it straightforward to extend the SDK to new models in the future as additional deployments become available through the gateway.
@@ -1164,7 +1164,7 @@ These numbers were captured under standard governance evaluation configurations 
 
 \section{Deployment and Validation}
 
-Following the implementation of the SDK, the completed framework was packaged as a Python wheel~\cite{pypa} and integrated with the target evaluation workflows. Comprehensive validation activities were conducted to ensure the reliability, accuracy, and effectiveness of the overall solution.
+Following the implementation of the SDK, the completed framework was packaged as a Python wheel and integrated with the target evaluation workflows. Comprehensive validation activities were conducted to ensure the reliability, accuracy, and effectiveness of the overall solution.
 
 The validation process focused on verifying the following aspects:
 

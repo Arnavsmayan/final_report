@@ -148,7 +148,7 @@
 \vspace{0.4cm}
 
 {\fontsize{13}{15}\selectfont\bfseries
-Faculty Mentor: Dr. Anjulo Mehto
+Faculty Mentor: Dr. Anjula Mehto
 }
 
 {\fontsize{12}{14}\selectfont
@@ -259,7 +259,7 @@ This project focused on the design and implementation of Agent Eval, a reusable 
 
 Agent Eval is built on a three agent LangGraph state machine. A child agent generates evaluation criteria, a tertiary agent runs a strict governance check across fifteen evaluators organized into five pillars, and a main agent synthesizes the final score and verdict. The SDK also supports multi model consensus, where the pipeline is executed independently across multiple judge models and a final synthesis agent produces a consolidated result.
 
-The framework integrates with the internal Eli Lilly LLM Gateway through Microsoft OAuth2 and supports both GPT 5 and Claude Sonnet. Token usage and cost tracking are built in, and a self contained HTML report is generated for every run. The resulting solution provides a vendor independent, extensible, and production ready foundation for governance focused evaluation of agentic AI workflows.
+The framework integrates with the internal Eli Lilly LLM Gateway and supports both GPT 5 and Claude Sonnet. Token usage and cost tracking are built in, and a self contained HTML report is generated for every run. The resulting solution provides a vendor independent, extensible, and production ready foundation for governance focused evaluation of agentic AI workflows.
 }
 
 \vspace{0.3in}
@@ -851,35 +851,6 @@ Total input and output tokens used across the pipeline, along with the estimated
 \end{tabular}
 \end{table}
 
-\subsection{Scoring Algorithm}
-
-The final score combines criteria averages with deductions from failing governance evaluators, in a way that is transparent and reproducible for reviewers.
-
-The base score is the arithmetic mean of the individual criteria scores, where $c_i$ is the score of the $i$-th criterion and $N$ is the total number of criteria.
-
-\[
-\text{Base Score} = \frac{1}{N} \sum_{i=1}^{N} c_i
-\]
-
-Each evaluator scoring below the pass threshold contributes a deduction proportional to how far it fell below.
-
-\[
-\text{Deduction}_j = \frac{\text{threshold} - s_j}{5} \times 0.5
-\]
-
-Here $s_j$ is the score of the $j$-th failing evaluator and the threshold defaults to seventy. When every evaluator inside a single pillar fails, the deductions for that pillar are doubled to reflect a systemic rather than isolated failure. The final score is clamped at zero:
-
-\[
-\text{Final Score} = \max\left(0, \; \text{Base Score} - \sum_{j} \text{Deduction}_j\right)
-\]
-
-For multi model runs the individual model scores are combined using percentage weights $w_m$ produced by the final comparison agent:
-
-\[
-\text{Final Score}_{\text{multi}} = \sum_{m} \text{Score}_m \times \frac{w_m}{100}
-\]
-
-\newpage
 
 \section{Governance Pillar Implementation}
 
@@ -1219,7 +1190,6 @@ The project delivered a reusable SDK for evaluating agentic AI outputs at Eli Li
 % ============================================================
 %  BIBLIOGRAPHY / REFERENCES
 % ============================================================
-\chapter{Bibliography / References}
 
 \begin{thebibliography}{99}
 

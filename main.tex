@@ -399,7 +399,7 @@ The resulting SDK provides a structured way to assess agentic outputs, accelerat
 
 Modern enterprise applications frequently involve large language models that generate free form, complex, or multi step outputs. Evaluating these outputs is fundamentally different from evaluating traditional software. There is rarely a single correct answer, the output may be valid in multiple forms, and the quality depends on factors such as factual accuracy, reasoning soundness, policy compliance, and contextual relevance.
 
-To address this evaluation gap, the LLM as judge approach has emerged as a widely accepted technique. In this approach, one or more language models are used to assess the quality of outputs produced by another model or agent. This pattern enables scalable, structured, and explainable evaluation that goes beyond keyword matching or static rules.
+To address this evaluation gap, the LLM as judge approach has emerged as a widely accepted technique~\cite{zheng2023judging, liu2023geval}. In this approach, one or more language models are used to assess the quality of outputs produced by another model or agent. This pattern enables scalable, structured, and explainable evaluation that goes beyond keyword matching or static rules.
 
 \section{Existing Evaluation Landscape}
 
@@ -411,9 +411,9 @@ As a result, diagnosing failures in agentic workflows often required ad hoc revi
 
 Before committing to a final architecture, a dedicated Proof of Concept (PoC) was developed in an isolated environment. The PoC was used to validate the feasibility of an LLM as judge pipeline, evaluate orchestration frameworks, and explore different evaluator structures before committing to a production design.
 
-The primary objective of the PoC was to evaluate orchestration frameworks for chaining multiple judge agents and to validate the feasibility of generating structured, machine readable scores from natural language judge outputs. During this phase, multiple technologies and architectural patterns were explored, including LangChain, LangGraph, and direct API calls without orchestration libraries.
+The primary objective of the PoC was to evaluate orchestration frameworks for chaining multiple judge agents and to validate the feasibility of generating structured, machine readable scores from natural language judge outputs. During this phase, multiple technologies and architectural patterns were explored, including LangChain~\cite{langchain}, LangGraph~\cite{langgraph}, and direct API calls without orchestration libraries.
 
-The evaluation focused on integration requirements, error handling, observability of internal pipeline state, and the ability to extend the design to support multi model consensus. LangGraph was ultimately selected because of its native support for state machine based agent orchestration, predictable execution order, and clean separation between agent responsibilities.
+The evaluation focused on integration requirements, error handling, observability of internal pipeline state, and the ability to extend the design to support multi model consensus. LangGraph~\cite{langgraph} was ultimately selected because of its native support for state machine based agent orchestration, predictable execution order, and clean separation between agent responsibilities.
 
 In addition to evaluating orchestration frameworks, commercially available evaluation platforms were also studied to understand their capabilities, integration requirements, and operational implications. While these solutions offered several advanced features, their adoption would have introduced additional licensing, onboarding, and long term operational costs along with vendor lock in concerns.
 
@@ -675,23 +675,23 @@ The final comparison agent is invoked only when the model parameter is a list. I
 
 While several open source evaluation libraries provide basic LLM as judge capabilities, the requirements of this project extended beyond the functionality offered by default implementations. As a result, multiple architectural decisions were introduced to align the SDK with organizational requirements and the internal model infrastructure.
 
-One of the key design decisions involved using LangGraph instead of a plain function call chain. LangGraph enabled predictable execution order, clean state propagation between agents, and a straightforward extension path for adding new agents in the future without rewriting existing code.
+One of the key design decisions involved using LangGraph~\cite{langgraph} instead of a plain function call chain. LangGraph enabled predictable execution order, clean state propagation between agents, and a straightforward extension path for adding new agents in the future without rewriting existing code.
 
-Several custom mechanisms were also implemented to improve reliability and developer experience. These included robust JSON parsing for LLM outputs, automatic handling of markdown code fences returned by the model, interactive prompts for missing parameters, defensive validation of inputs, and a fully self contained HTML report that could be opened without any external dependencies.
+Several custom mechanisms were also implemented to improve reliability and developer experience. These included robust JSON parsing for LLM outputs, automatic handling of markdown code fences returned by the model, interactive prompts for missing parameters, defensive validation of inputs using Pydantic~\cite{pydantic}, and a fully self contained HTML report that could be opened without any external dependencies.
 
 These customizations enabled the SDK to address organization specific evaluation requirements while maintaining scalability, flexibility, and operational simplicity.
 
 \section{Gateway Integration and Authentication}
 
-All large language model invocations within the SDK are routed through the internal Eli Lilly LLM Gateway. The gateway provides a centrally governed access layer, ensures that only approved models are used, and enforces organizational policies on token usage and access control.
+All large language model invocations within the SDK are routed through the internal Eli Lilly LLM Gateway~\cite{lillygw}. The gateway provides a centrally governed access layer, ensures that only approved models are used, and enforces organizational policies on token usage and access control.
 
-To interact with the gateway, the SDK includes a thin client wrapper that handles token acquisition, request signing, and response normalization. Authentication is performed using the Microsoft OAuth2 client credentials flow, where a short lived access token is obtained from the Microsoft identity platform using the application's client identifier, client secret, and tenant identifier. The token is then attached to every gateway request and refreshed automatically when it expires.
+To interact with the gateway, the SDK includes a thin client wrapper that handles token acquisition, request signing, and response normalization. Authentication is performed using the Microsoft OAuth2 client credentials flow~\cite{msoauth2}, where a short lived access token is obtained from the Microsoft identity platform using the application's client identifier, client secret, and tenant identifier. The token is then attached to every gateway request and refreshed automatically when it expires.
 
 Two model identifiers are supported through the gateway integration:
 
 \begin{itemize}
-    \item gpt5, mapped to a GPT 5 model deployment.
-    \item claude, mapped to a Claude Sonnet model deployment.
+    \item gpt5, mapped to a GPT 5 model deployment~\cite{openai}.
+    \item claude, mapped to a Claude Sonnet model deployment~\cite{claude}.
 \end{itemize}
 
 This abstraction allows the rest of the SDK to interact with any approved model without having to manage authentication, retry behavior, or vendor specific request formats. It also makes it straightforward to extend the SDK to new models in the future as additional deployments become available through the gateway.
@@ -1164,7 +1164,7 @@ These numbers were captured under standard governance evaluation configurations 
 
 \section{Deployment and Validation}
 
-Following the implementation of the SDK, the completed framework was packaged as a Python wheel and integrated with the target evaluation workflows. Comprehensive validation activities were conducted to ensure the reliability, accuracy, and effectiveness of the overall solution.
+Following the implementation of the SDK, the completed framework was packaged as a Python wheel~\cite{pypa} and integrated with the target evaluation workflows. Comprehensive validation activities were conducted to ensure the reliability, accuracy, and effectiveness of the overall solution.
 
 The validation process focused on verifying the following aspects:
 
@@ -1273,29 +1273,39 @@ These enhancements can further strengthen the evaluation ecosystem and provide d
 % ============================================================
 \chapter{Bibliography / References}
 
-\begin{enumerate}
+\begin{thebibliography}{99}
 
-\item LangChain Inc., \textit{LangGraph Documentation}. Available at: \url{https://langchain-ai.github.io/langgraph/}
+\bibitem{langgraph}
+LangChain Inc., ``LangGraph documentation,'' 2024. [Online]. Available: \url{https://langchain-ai.github.io/langgraph/}
 
-\item LangChain Inc., \textit{LangChain Documentation}. Available at: \url{https://python.langchain.com/docs/}
+\bibitem{langchain}
+LangChain Inc., ``LangChain documentation,'' 2024. [Online]. Available: \url{https://python.langchain.com/docs/}
 
-\item OpenAI, \textit{OpenAI API and Model Documentation}. Available at: \url{https://platform.openai.com/docs/}
+\bibitem{openai}
+OpenAI, ``OpenAI API and model documentation,'' 2024. [Online]. Available: \url{https://platform.openai.com/docs/}
 
-\item Anthropic, \textit{Claude Model Documentation}. Available at: \url{https://docs.anthropic.com/}
+\bibitem{claude}
+Anthropic, ``Claude model documentation,'' 2024. [Online]. Available: \url{https://docs.anthropic.com/}
 
-\item Zheng, L. et al., \textit{Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena}, 2023. Available at: \url{https://arxiv.org/abs/2306.05685}
+\bibitem{zheng2023judging}
+L. Zheng, W.-L. Chiang, Y. Sheng, S. Zhuang, Z. Wu, Y. Zhuang, Z. Lin, Z. Li, D. Li, E. P. Xing, H. Zhang, J. E. Gonzalez, and I. Stoica, ``Judging LLM-as-a-judge with MT-Bench and Chatbot Arena,'' \textit{arXiv preprint arXiv:2306.05685}, Jun. 2023. [Online]. Available: \url{https://arxiv.org/abs/2306.05685}
 
-\item Liu, Y. et al., \textit{G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment}, 2023. Available at: \url{https://arxiv.org/abs/2303.16634}
+\bibitem{liu2023geval}
+Y. Liu, D. Iter, Y. Xu, S. Wang, R. Xu, and C. Zhu, ``G-Eval: NLG evaluation using GPT-4 with better human alignment,'' \textit{arXiv preprint arXiv:2303.16634}, Mar. 2023. [Online]. Available: \url{https://arxiv.org/abs/2303.16634}
 
-\item Microsoft, \textit{Microsoft Identity Platform and OAuth 2.0 Authorization}. Available at: \url{https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow}
+\bibitem{msoauth2}
+Microsoft, ``Microsoft identity platform and OAuth 2.0 authorization code flow,'' 2024. [Online]. Available: \url{https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow}
 
-\item Python Software Foundation, \textit{Python Packaging User Guide}. Available at: \url{https://packaging.python.org/}
+\bibitem{pypa}
+Python Software Foundation, ``Python packaging user guide,'' 2024. [Online]. Available: \url{https://packaging.python.org/}
 
-\item Pydantic, \textit{Pydantic Documentation}. Available at: \url{https://docs.pydantic.dev/}
+\bibitem{pydantic}
+Pydantic, ``Pydantic documentation,'' 2024. [Online]. Available: \url{https://docs.pydantic.dev/}
 
-\item Eli Lilly and Company, \textit{Internal LLM Gateway Documentation (Restricted Access)}.
+\bibitem{lillygw}
+Eli Lilly and Company, ``Internal LLM gateway documentation,'' \textit{Restricted internal reference}, 2026.
 
-\end{enumerate}
+\end{thebibliography}
 
 % ── Peer Review ─────────────────────────────────
 \chapter{Peer Review}

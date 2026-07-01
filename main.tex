@@ -511,33 +511,7 @@ Additional requirements emerged around governance specific checks, multi model c
 
 \begin{figure}[h]
     \centering
-    \begin{tikzpicture}[
-      font=\small,
-      block/.style={rectangle, rounded corners, draw=black, thick, minimum width=4.2cm, minimum height=0.85cm, align=center},
-      user/.style={block, fill=gray!15},
-      sdk/.style={block, fill=blue!10},
-      gw/.style={block, fill=orange!18},
-      model/.style={block, fill=red!12, minimum width=2cm},
-      outbox/.style={block, fill=green!15, minimum width=3.2cm},
-      arrow/.style={-{Stealth[length=2.5mm]}, thick}
-    ]
-      \node[user] (caller) {User Application Code};
-      \node[sdk, below=0.55cm of caller] (entry) {\texttt{evaluate(input, output)}};
-      \node[sdk, below=0.55cm of entry] (pipeline) {Three Agent Pipeline\\(Child $\to$ Tertiary $\to$ Main)};
-      \node[gw, below=0.55cm of pipeline] (gwc) {LillyGatewayLLM Client (OAuth2)};
-      \node[gw, below=0.55cm of gwc] (gw) {Lilly Internal LLM Gateway};
-      \node[model, below=0.7cm of gw, xshift=-1.8cm] (gpt) {GPT-5};
-      \node[model, below=0.7cm of gw, xshift=1.8cm] (cl) {Claude Sonnet};
-      \node[outbox, right=1.2cm of pipeline] (result) {Result + HTML Report};
-
-      \draw[arrow] (caller) -- (entry);
-      \draw[arrow] (entry) -- (pipeline);
-      \draw[arrow] (pipeline) -- (gwc);
-      \draw[arrow] (gwc) -- (gw);
-      \draw[arrow] (gw) -- (gpt);
-      \draw[arrow] (gw) -- (cl);
-      \draw[arrow] (pipeline) -- (result);
-    \end{tikzpicture}
+    \includegraphics[width=\textwidth]{high_level_architecture.png}
     \caption{High Level Architecture of Agent Eval}
     \label{fig:high_level_architecture}
 \end{figure}
@@ -606,30 +580,6 @@ The PoC focused on the following objectives:
 
 Multiple orchestration approaches and evaluator structures were explored during this phase, helping establish the technical foundation for the final implementation and providing confidence before proceeding towards a production ready solution.
 
-\begin{figure}[h]
-  \centering
-  \resizebox{\textwidth}{!}{%
-  \begin{tikzpicture}[
-    font=\small,
-    io/.style={trapezium, trapezium left angle=70, trapezium right angle=110, draw, minimum width=2.3cm, minimum height=1.0cm, fill=gray!15, align=center},
-    agent/.style={rectangle, rounded corners, draw=black, thick, minimum width=3.3cm, minimum height=1.5cm, align=center, fill=blue!10},
-    result/.style={rectangle, rounded corners, draw=black, thick, minimum width=2.8cm, minimum height=1.0cm, align=center, fill=green!15},
-    arrow/.style={-{Stealth[length=2.5mm]}, thick}
-  ]
-    \node[io] (input) {Input \&\\Output};
-    \node[agent, right=0.8cm of input] (child) {Child Agent\\\footnotesize Criteria Generation};
-    \node[agent, right=0.8cm of child] (tert) {Tertiary Agent\\\footnotesize Governance\\\footnotesize (15 Evaluators)};
-    \node[agent, right=0.8cm of tert] (main) {Main Agent\\\footnotesize Final Synthesis};
-    \node[result, right=0.8cm of main] (out) {Score,\\Verdict,\\Evidence};
-    \draw[arrow] (input) -- (child);
-    \draw[arrow] (child) -- node[above, font=\scriptsize]{criteria} (tert);
-    \draw[arrow] (tert) -- node[above, font=\scriptsize]{pillar results} (main);
-    \draw[arrow] (main) -- (out);
-  \end{tikzpicture}}
-  \caption{Agent Eval Pipeline Flowchart}
-  \label{fig:flowchart}
-\end{figure}
-
 \section{Final Architecture Design}
 
 Based on the insights gained during the Proof of Concept phase, a custom three agent evaluation architecture was designed. The architecture follows a state machine driven approach in which the evaluation input flows through three sequential judge agents, with each agent producing structured output that is consumed by the next stage.
@@ -689,62 +639,37 @@ Regular check-ins with the mentor ensured alignment with organizational expectat
 
 \subsection{End-to-End Data Flow}
 
+Figure~\ref{fig:data_flow} contrasts the two execution paths supported by the SDK. The single model flow runs the three agent pipeline once against the selected model and derives the final score directly from the criteria averages and governance deductions. The multi model flow runs the same pipeline once per configured model, produces an independent score for each model, and then invokes the final comparison agent to assign quality weights and compute a weighted average. Both flows terminate with the generation of the HTML dashboard and the return of a fully populated result dictionary.
+
 \begin{figure}[h]
-  \centering
-  \resizebox{\textwidth}{!}{%
-  \begin{tikzpicture}[
-    font=\small,
-    stage/.style={rectangle, rounded corners, draw=black, thick, minimum width=3.6cm, minimum height=1.1cm, align=center, fill=blue!10},
-    side/.style={rectangle, rounded corners, draw=black!60, dashed, minimum width=3.2cm, minimum height=0.8cm, align=center, fill=orange!15, font=\footnotesize},
-    pillar/.style={rectangle, rounded corners, draw=black!60, minimum width=2.2cm, minimum height=0.55cm, align=center, fill=red!12, font=\scriptsize},
-    io/.style={trapezium, trapezium left angle=70, trapezium right angle=110, draw, minimum width=2.2cm, minimum height=0.9cm, fill=gray!15, align=center},
-    outbox/.style={rectangle, rounded corners, draw=black, thick, minimum width=3.0cm, minimum height=1.0cm, align=center, fill=green!15},
-    arrow/.style={-{Stealth[length=2.5mm]}, thick},
-    dasharrow/.style={-{Stealth[length=2.0mm]}, dashed, thick, draw=black!60}
-  ]
-    % Main pipeline (vertical, left column)
-    \node[io] (input) {User Input\\\& Agent Output};
-    \node[stage, below=0.5cm of input] (child) {Child Agent\\\footnotesize Criteria Generation};
-    \node[stage, below=0.6cm of child] (tert) {Tertiary Agent\\\footnotesize 15 Governance Evaluators};
-    \node[stage, below=0.6cm of tert] (main) {Main Agent\\\footnotesize Final Synthesis};
-    \node[outbox, below=0.5cm of main] (report) {Result Dict\\+ HTML Report};
-
-    % Side: Gateway client
-    \node[side, right=1.6cm of child] (gw) {LillyGatewayLLM\\OAuth2 $\rightarrow$ GPT-5 / Claude};
-
-    % Side: Pillar grid
-    \node[pillar, right=1.4cm of tert, yshift=0.6cm] (p1) {Goal Alignment};
-    \node[pillar, right=0.15cm of p1] (p2) {Compliance};
-    \node[pillar, below=0.12cm of p1] (p3) {Reasoning};
-    \node[pillar, right=0.15cm of p3] (p4) {Tool Safety};
-    \node[pillar, below=0.12cm of p3] (p5) {Robustness};
-
-    % Side: Cost tracker
-    \node[side, right=1.6cm of main] (cost) {CostTracker\\Token \& Cost Accounting};
-
-    % Main pipeline arrows
-    \draw[arrow] (input) -- (child);
-    \draw[arrow] (child) -- node[left, font=\scriptsize]{criteria} (tert);
-    \draw[arrow] (tert) -- node[left, font=\scriptsize]{pillar results} (main);
-    \draw[arrow] (main) -- (report);
-
-    % Gateway used by all 3 agents
-    \draw[dasharrow] (child.east) -- (gw.west);
-    \draw[dasharrow] (tert.east) -- (gw.south west);
-    \draw[dasharrow] (main.east) to[bend right=15] (gw.south);
-
-    % Pillars are produced by tertiary agent
-    \draw[dasharrow] (p5.west) -- (tert.east);
-
-    % Cost tracker accumulates from gateway + flows into report
-    \draw[dasharrow] (gw.south) to[bend left=10] (cost.north);
-    \draw[dasharrow] (cost.south) to[bend left=15] (report.east);
-  \end{tikzpicture}}
-  \caption{End-to-End Data Flow in Agent Eval}
-  \label{fig:data_flow}
+    \centering
+    \includegraphics[width=\textwidth]{data_flow.png}
+    \caption{End-to-End Data Flow in Agent Eval, comparing the single model and multi model paths.}
+    \label{fig:data_flow}
 \end{figure}
 
 The architecture was designed to be modular, vendor independent, and extensible for future evaluation requirements.
+
+\newpage
+
+\subsection{Component Architecture}
+
+The end to end flow described above is realized by a small set of internal components, each with a well defined responsibility. Figure~\ref{fig:component_arch} shows the module level view of the SDK, including the public entry point, the parameter validation layer, the gateway client, the three agents that make up the single model evaluation pipeline, and the final comparison agent that is invoked only for multi model runs.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{component_architecture.png}
+    \caption{Component architecture of the Agent Eval SDK.}
+    \label{fig:component_arch}
+\end{figure}
+
+The \texttt{evaluate()} function is the sole public API entry point. It performs parameter validation, decides between single and multi model routing, and triggers the dashboard generation once the pipeline completes. The validation layer is composed of a set of private helpers that check credentials, prompt for missing arguments, verify the pass threshold, validate the requested model or model list, and confirm that the requested evaluators exist in the catalog.
+
+The \texttt{LillyGatewayLLM} client centralizes all interactions with the internal LLM Gateway. It performs OAuth2 authentication using client credentials, resolves the requested model identifier to the corresponding gateway deployment, exposes both raw and JSON aware invocation methods, tracks token consumption, and refreshes access tokens transparently.
+
+The single model evaluation function orchestrates the three agent pipeline. The child agent produces the criteria based on the user input, the tertiary agent runs the full governance evaluator catalog in strict mode, and the main agent computes the per criterion scores that feed into the final verdict.
+
+The final comparison agent is invoked only when the model parameter is a list. It reads the reasoning and governance results produced by each participating model, assigns a percentage weight to each model based on the quality of its reasoning, and computes the final consensus score using a code path that guarantees the weights sum to one hundred. Isolating this logic in a dedicated component keeps the single model path lean while still allowing the SDK to deliver reliable multi model consensus when it is requested.
 
 \newpage
 

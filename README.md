@@ -12,19 +12,19 @@
 
 ## Abstract
 
-Agentic AI outputs are probabilistic, free form, and difficult to assess with traditional deterministic testing, and existing open source evaluation libraries lacked governance focused checks, LLM Gateway integration, and multi model consensus. This project delivers **Agent Eval**, a Python SDK that evaluates the outputs of any agentic workflow through a three agent LangGraph pipeline, a fixed catalog of fifteen governance evaluators across five pillars, optional multi model consensus, and a self contained interactive HTML report. Built on the internal Eli Lilly LLM Gateway with GPT 5 and Claude Sonnet, the SDK provides structured, reproducible, and governance aware quality assessment for agentic features before they reach production.
+The project implements an SDK for evaluating agentic AI outputs using an LLM as judge approach. It uses a three agent pipeline with governance evaluators across five pillars, multi model consensus, and a self contained HTML report. The project demonstrates a practical industry solution developed through requirement analysis, proof of concept validation, and production implementation.
 
 ## Three Strengths of the Work
 
-1. **Solves a real engineering problem end to end.** The project addresses a concrete production gap in evaluating agentic AI at Eli Lilly rather than a synthetic academic exercise, and integrates directly with the internal LLM Gateway used by other engineering teams.
-2. **Goes beyond tool integration — full architecture design.** The work covers requirement analysis, PoC exploration, custom three agent orchestration, evaluator design across five governance pillars, multi model consensus, scoring algorithm, and self contained reporting, all designed and implemented from scratch.
-3. **Leverages existing infrastructure to reduce cost and lock in.** By reusing the internal LLM Gateway and internally approved models, the SDK avoided onboarding a commercial evaluation platform, eliminating recurring licensing costs while retaining full control over evaluator design and future expansion.
+1. The project addresses a real evaluation gap in agentic AI systems within an enterprise environment.
+2. The work goes beyond a simple evaluation library and includes architecture design, technology evaluation, and custom implementation.
+3. The solution integrates well with existing infrastructure, reducing cost while maintaining strong evaluation capabilities.
 
 ## Useful Recommendations
 
-1. **Extend evaluation to multi modal agent outputs** (images, audio, video) through format specific evaluators and model specific judging capabilities.
-2. **Add persistent evaluation history and cross run comparison** so teams can track quality trends over time, run regression analysis, and detect drift across agent versions.
-3. **Explore adaptive evaluator selection and CI integration** so relevant evaluators are chosen automatically from output structure and evaluations can gate pull requests in a continuous integration pipeline.
+1. Extend evaluation support to multi modal agent outputs alongside text based outputs.
+2. Add persistent evaluation history and cross run comparison for longitudinal quality tracking.
+3. Explore continuous integration gating for automated evaluation of agentic features.
 
 ---
 

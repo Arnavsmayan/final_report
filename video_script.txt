@@ -1,0 +1,30 @@
+[Teleprompter script for Agent Eval project video — approx 535 words, ~3:40 at a natural 145 wpm pace. Delete this bracketed line before recording.]
+
+
+Hi, I'm Arnav Jain, roll number 102203979, from Thapar Institute of Engineering and Technology.
+
+For my project semester, I worked with Eli Lilly and Company on a project called Agent Eval. My faculty mentor was Dr. Anjula Mehto, and my industrial mentor at Lilly was Malashree B.
+
+Agent Eval is an SDK — a software development kit — for evaluating agentic AI workflows. When a team at Lilly builds an AI agent that takes actions, calls tools, and generates free-form responses, Agent Eval scores how well that agent actually did its job. The whole thing is designed to be dropped into any workflow with a single function call.
+
+So why did Lilly need this in the first place?
+
+Agentic outputs are probabilistic and open-ended. You can't test them with a fixed set of pass-or-fail assertions the way you'd test normal software. Manual review by engineers is slow, inconsistent, and hard to audit. And the open-source evaluation libraries out there don't have the governance checks or Gateway integration that a regulated pharma company actually needs. So teams had no unified way to answer one simple question — is this agent good enough to ship?
+
+Agent Eval solves that with a three-agent pipeline built on LangGraph.
+
+The Child Agent looks at the input and the output, and automatically generates evaluation criteria — so you don't have to write test cases by hand. Every run gets criteria that are tailored to what the agent was actually asked to do.
+
+The Tertiary Agent then runs fifteen governance evaluators across five pillars — Goal Alignment, Compliance, Reasoning, Tool Safety, and Robustness. That covers things like role drift, policy violations, hallucination, prompt injection, and output consistency.
+
+The Main Agent takes everything, weighs it, and produces a final governance verdict with supporting evidence.
+
+To make the judgement more reliable, Agent Eval also supports multi-model consensus. The same output is judged by GPT 5 and Claude Sonnet in parallel, and a comparison agent reconciles the two. This reduces bias from any single model and gives a higher-confidence verdict.
+
+The whole thing runs on Lilly's internal LLM Gateway, so there's no third-party PII risk and no data leaving the enterprise. And every run produces one self-contained, interactive HTML report — with scores per pillar, individual violations, and the underlying evidence for each check. Reviewers and auditors can read the report directly, without needing to touch the code.
+
+So what's the end result?
+
+Teams get reproducible, evidence-backed governance verdicts, instead of ad-hoc engineer review. One consistent schema across every agentic feature Lilly ships. And higher-confidence launches, thanks to consensus judgement across two independent models.
+
+That's Agent Eval. Thank you.
